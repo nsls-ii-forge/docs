@@ -129,3 +129,29 @@ about:
   license_file: "LICENSE"
   summary: "Software for performing resonant inelastic xray scattering analysis at NSLS-II"
 ```
+
+git clone https://github.com/nsls-ii-forge/event-model-feedstock.git
+cp event-model-feedstock/recipe/conda_build_config.yaml ~/project/sixtools-tmp/sixtools/
+
+(smithy) jlynch@thorisdottir:~/host/project/sixtools-tmp/sixtools$ ls -l
+total 12
+-rw-r--r-- 1 jlynch jlynch   96 Sep 11 14:51 conda_build_config.yaml
+-rw-r--r-- 1 jlynch jlynch 1584 Sep 11 14:36 LICENSE
+-rw-r--r-- 1 jlynch jlynch  964 Sep 11 14:49 meta.yaml
+
+# Initialize feedstock
+
+```bash
+(smithy) thorisdottir:sixtools-tmp joshualynch$ conda-smithy init sixtools
+No numpy version specified in conda_build_config.yaml.  Falling back to default numpy value of 1.11
+Initialized empty Git repository in /Users/joshualynch/project/sixtools-tmp/sixtools-feedstock/.git/
+[master (root-commit) c214512] Initial feedstock commit with conda-smithy 3.4.5.
+ 4 files changed, 80 insertions(+)
+ create mode 100644 conda-forge.yml
+ create mode 100644 recipe/LICENSE
+ create mode 100644 recipe/conda_build_config.yaml
+ create mode 100644 recipe/meta.yaml
+
+Repository created, please edit conda-forge.yml to configure the upload channels
+and afterwards call 'conda smithy register-github'
+```
