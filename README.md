@@ -139,7 +139,7 @@ total 12
 -rw-r--r-- 1 jlynch jlynch 1584 Sep 11 14:36 LICENSE
 -rw-r--r-- 1 jlynch jlynch  964 Sep 11 14:49 meta.yaml
 
-# Initialize feedstock
+## Initialize feedstock
 
 ```bash
 (smithy) thorisdottir:sixtools-tmp joshualynch$ conda-smithy init sixtools
@@ -168,4 +168,9 @@ $ cp event-model-feedstock/conda-forge.yml recipes/sixtools
 # nsls-ii-forge vars:
 export AZURE_ORG_OR_USER=nsls2forge
 export AZURE_PROJECT_NAME=nsls2forge
+```
+## Create GitHub repository
+
+```bash
+conda smithy register-github --organization nsls-ii-forge ./
 ```
