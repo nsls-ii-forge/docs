@@ -177,3 +177,9 @@ conda smithy register-github --organization nsls-ii-forge ./
 
 ## Push files
 $ git push -u upstream master
+
+From recipes/sixtools-feedstock directory:
+
+```bash
+$ conda smithy register-ci --organization nsls-ii-forge --without-circle --without-appveyor --without-travis --feedstock_directory ./
+```
