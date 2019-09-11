@@ -174,3 +174,6 @@ export AZURE_PROJECT_NAME=nsls2forge
 ```bash
 conda smithy register-github --organization nsls-ii-forge ./
 ```
+
+## Push files
+$ git push -u upstream master
