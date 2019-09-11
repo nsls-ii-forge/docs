@@ -214,3 +214,55 @@ Changes to be committed:
 	new file:   azure-pipelines.yml
 	new file:   build-locally.py
 ```
+
+## Commit to branch 'rerender'
+
+```bash
+(smithy) thorisdottir:sixtools-feedstock joshualynch$ git checkout -b rerender
+A	.azure-pipelines/azure-pipelines-linux.yml
+A	.azure-pipelines/build_steps.sh
+A	.azure-pipelines/run_docker_build.sh
+A	.ci_support/README
+A	.ci_support/linux_.yaml
+A	.circleci/config.yml
+A	.gitattributes
+A	.gitignore
+A	LICENSE.txt
+A	README.md
+A	azure-pipelines.yml
+A	build-locally.py
+Switched to a new branch 'rerender'
+(smithy) $ git commit -m "MNT: Re-rendered with conda-build 3.18.9, conda-smithy 3.4.5, and conda-forge-pinning 2019.09.08"
+[rerender 21f8fc3] MNT: Re-rendered with conda-build 3.18.9, conda-smithy 3.4.5, and conda-forge-pinning 2019.09.08
+ 12 files changed, 369 insertions(+)
+ create mode 100755 .azure-pipelines/azure-pipelines-linux.yml
+ create mode 100755 .azure-pipelines/build_steps.sh
+ create mode 100755 .azure-pipelines/run_docker_build.sh
+ create mode 100644 .ci_support/README
+ create mode 100644 .ci_support/linux_.yaml
+ create mode 100644 .circleci/config.yml
+ create mode 100644 .gitattributes
+ create mode 100644 .gitignore
+ create mode 100644 LICENSE.txt
+ create mode 100644 README.md
+ create mode 100644 azure-pipelines.yml
+ create mode 100755 build-locally.py
+(smithy) $ git status
+On branch rerender
+nothing to commit, working tree clean
+(smithy) $ git push -u upstream rerender
+Enumerating objects: 18, done.
+Counting objects: 100% (18/18), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (15/15), done.
+Writing objects: 100% (17/17), 6.93 KiB | 3.47 MiB/s, done.
+Total 17 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), done.
+remote:
+remote: Create a pull request for 'rerender' on GitHub by visiting:
+remote:      https://github.com/nsls-ii-forge/sixtools-feedstock/pull/new/rerender
+remote:
+To github.com:nsls-ii-forge/sixtools-feedstock.git
+ * [new branch]      rerender -> rerender
+Branch 'rerender' set up to track remote branch 'rerender' from 'upstream'.
+```
