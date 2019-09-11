@@ -1,6 +1,12 @@
 language: python
 python:
   - 3.6
+
+env:
+  global:
+    # Doctr deploy key for nsls-ii-forge/docs
+    - secure: "pfq9VKga46sY0efTSfvS9B/v6mHKjtHnz3RgOKUC8stOEjqnH5OQcxivXMRln/E33jOVsaEaegLkzxQ3OLk4/fqrWKQq4VfgjfClOlLNnz6sFZAkwndHmXArx5SaDy3IT71U1XCI77b4gahOKpu4Vjg4eshdLb396zO+DZHUu0Yx+STtihQk2udbkLNPQ7ZjSvGT5BjqbNK3TnjlQWR1biuR1jnKF3YHmXufpXBRRL6wSJFV2zOEceJ+6xFQ3DbS46JOYLX72EFfFsHoA4PgHGDKt8W/uWriL99e+r7dijHDfs9g7tk2R9o53w0sTSmoPzQ2/dqeNWN4UwsKHH2DL2QtD+qbW9T0/PJUIjLLc7SCMnK7T2vY0pIXdLuuBpR97JoH1R7tgcvkWIYREUruLshloZqcIevg/wbSdbItrXPB4iWH8wmvPOHz+qERB2AxclwytMzd8QgomF//9GPG2JdhxriFyiOJR/kgjasHGJqQUTkKaMw5A6QNJ1Ahh1MOy/nJlSk1Bxxa+OKSosndpJgpCJRwI+0XFImOqtQPKf5nsFJcp1UjCMBICwdU6qJTjGml6VYJ5hIhMoQ8cFKEgA+vMfPVLDh3Tb92Dw1e4CG8YfGSaLgY8jr1gkSL/EdzmSeY51FPvnV5PPw4Pk413NnbshD+SKuCjY4dzT9mTcw="
+
 cache:
   directories:
     - $HOME/.cache/pip
@@ -11,4 +17,8 @@ install:
   - pip install -r requirements-dev.txt
 
 script:
+  - set -e
   - make -C . html  # Build the documentation.
+  - pip install doctr
+  - doctr deploy --built-docs build/html .
+
