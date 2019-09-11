@@ -54,7 +54,7 @@ Remove maintainers.
 Remove extra block.
 
 Before:
-```
+```yaml
 requirements:
   host:
     - databroker
@@ -98,7 +98,7 @@ extra:
 
 ```
 After:
-```
+```yaml
 requirements:
   host:
     - python
