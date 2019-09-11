@@ -22,3 +22,14 @@ $ cp /keybase/team/dama/anaconda.token .conda-smithy/
 $ cp /keybase/team/dama/azure.token .conda-smithy/
 $ cp /keybase/team/dama/github.token .conda-smithy/
 ```
+
+## Generate a (noarch) recipe
+
+$ conda activate smithy
+(smithy) $ mkdir recipes
+(smithy) $ cd recipes/
+(smithy) $ conda skeleton pypi sixtools --noarch
+
+## Edit meta.yml
+$ vi recipes/sixtools/meta.yml
+
