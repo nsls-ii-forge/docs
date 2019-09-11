@@ -161,3 +161,11 @@ Replace conda-forge.yml with event-model conda-forge.yml.
 ```bash
 $ cp event-model-feedstock/conda-forge.yml recipes/sixtools
 ```
+
+## Define azure environment variables
+
+```bash
+# nsls-ii-forge vars:
+export AZURE_ORG_OR_USER=nsls2forge
+export AZURE_PROJECT_NAME=nsls2forge
+```
