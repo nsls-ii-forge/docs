@@ -130,14 +130,18 @@ about:
   summary: "Software for performing resonant inelastic xray scattering analysis at NSLS-II"
 ```
 
+```bash
 git clone https://github.com/nsls-ii-forge/event-model-feedstock.git
 cp event-model-feedstock/recipe/conda_build_config.yaml ~/project/sixtools-tmp/sixtools/
+```
 
-(smithy) jlynch@thorisdottir:~/host/project/sixtools-tmp/sixtools$ ls -l
+```bash
+(smithy) recipes/sixtools$ ls -l
 total 12
 -rw-r--r-- 1 jlynch jlynch   96 Sep 11 14:51 conda_build_config.yaml
 -rw-r--r-- 1 jlynch jlynch 1584 Sep 11 14:36 LICENSE
 -rw-r--r-- 1 jlynch jlynch  964 Sep 11 14:49 meta.yaml
+```
 
 ## Initialize feedstock
 
@@ -176,7 +180,10 @@ conda smithy register-github --organization nsls-ii-forge ./
 ```
 
 ## Push files
+
+```bash
 $ git push -u upstream master
+```
 
 From recipes/sixtools-feedstock directory:
 
