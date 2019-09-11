@@ -155,3 +155,9 @@ Initialized empty Git repository in /Users/joshualynch/project/sixtools-tmp/sixt
 Repository created, please edit conda-forge.yml to configure the upload channels
 and afterwards call 'conda smithy register-github'
 ```
+
+Replace conda-forge.yml with event-model conda-forge.yml.
+
+```bash
+$ cp event-model-feedstock/conda-forge.yml recipes/sixtools
+```
