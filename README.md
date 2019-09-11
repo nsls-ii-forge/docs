@@ -190,3 +190,27 @@ From recipes/sixtools-feedstock directory:
 ```bash
 $ conda smithy register-ci --organization nsls-ii-forge --without-circle --without-appveyor --without-travis --feedstock_directory ./
 ```
+
+## Rerender feedstock
+
+```bash
+$ conda smithy rerender --feedstock_directory .
+$ git status
+On branch master
+Your branch is up to date with 'upstream/master'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   .azure-pipelines/azure-pipelines-linux.yml
+	new file:   .azure-pipelines/build_steps.sh
+	new file:   .azure-pipelines/run_docker_build.sh
+	new file:   .ci_support/README
+	new file:   .ci_support/linux_.yaml
+	new file:   .circleci/config.yml
+	new file:   .gitattributes
+	new file:   .gitignore
+	new file:   LICENSE.txt
+	new file:   README.md
+	new file:   azure-pipelines.yml
+	new file:   build-locally.py
+```
