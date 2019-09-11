@@ -266,3 +266,5 @@ To github.com:nsls-ii-forge/sixtools-feedstock.git
  * [new branch]      rerender -> rerender
 Branch 'rerender' set up to track remote branch 'rerender' from 'upstream'.
 ```
+
+In the pull request description paste the PyPI link to sixtools: https://pypi.org/project/sixtools/0.0.3/
