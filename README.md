@@ -215,7 +215,7 @@ Changes to be committed:
 	new file:   build-locally.py
 ```
 
-## Commit to branch 'rerender'
+### Commit to branch 'rerender'
 
 ```bash
 (smithy) thorisdottir:sixtools-feedstock joshualynch$ git checkout -b rerender
