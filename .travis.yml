@@ -1,0 +1,14 @@
+language: python
+python:
+  - 3.6
+cache:
+  directories:
+    - $HOME/.cache/pip
+    - $HOME/.ccache  # https://github.com/travis-ci/travis-ci/issues/5853
+
+install:
+  # Install extra requirements for running tests and building docs.
+  - pip install -r requirements-dev.txt
+
+script:
+  - make -C . html  # Build the documentation.
