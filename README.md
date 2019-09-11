@@ -5,15 +5,20 @@ $ conda create -n smithy -c conda-forge conda-smithy
 
 ```
 
+## Copy tokens
+
 ```bash
-$ ls /Volumes/Keybase/team/dama/
+$ ls /keybase/team/dama/
 anaconda.token
 azure.token
 github.token
 ...
 ```
 
-Place these files in .conda-smithy.
+Create directory ~/.conda-smithy and place these three files in that Place these files in .conda-smithy.
 ```bash
 $ mkdir .conda-smithy
+$ cp /keybase/team/dama/anaconda.token .conda-smithy/
+$ cp /keybase/team/dama/azure.token .conda-smithy/
+$ cp /keybase/team/dama/github.token .conda-smithy/
 ```
