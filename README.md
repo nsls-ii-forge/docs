@@ -24,14 +24,17 @@ $ cp /keybase/team/dama/github.token .conda-smithy/
 ```
 
 ## Generate a (noarch) recipe
-
+```bash
 $ conda activate smithy
 (smithy) $ mkdir recipes
 (smithy) $ cd recipes/
 (smithy) $ conda skeleton pypi sixtools --noarch
+```
 
 ## Edit meta.yml
+```bash
 $ vi recipes/sixtools/meta.yml
+```
 
 Remove all entries from host section except python and pip.
 Add requires and commands to the test section. 
