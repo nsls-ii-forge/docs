@@ -188,7 +188,7 @@ $ git push -u upstream master
 From recipes/sixtools-feedstock directory:
 
 ```bash
-$ conda smithy register-ci --organization nsls-ii-forge --without-circle --without-appveyor --without-travis --feedstock_directory ./
+$ conda smithy register-ci --organization nsls-ii-forge --without-circle --without-appveyor --without-travis --without-drone --feedstock_directory ./
 ```
 
 ## Rerender feedstock
