@@ -1,13 +1,14 @@
-=================
+#################
 Creating Packages
-=================
+#################
 
 Feedstocks for Azure pipelines may be generated based on
 existing PyPI or conda-forge packages, or directly from GitHub
 package repositories.
 
+===================
 Directory structure
--------------------
+===================
 
 The following directory structure for the packaging project
 is recommended:
@@ -36,11 +37,12 @@ the directory that contains the feedstock repository, which is
 uploaded to **nsls-ii-forge**. The directory is created by conda-smithy
 as part of feedstock initalization.
 
+==================================
 Set up the Development Environment
 ==================================
 
 Install "conda-smithy"
-----------------------
+======================
 
 Create a new conda environment (let's name it ``smithy``):
 
@@ -51,16 +53,16 @@ Create a new conda environment (let's name it ``smithy``):
 
 
 Install Keybase
------------------
+===============
 
 Use `installation instructions <https://keybase.io/download>`_ 
 to download and install **Keybase**. Start **Keybase** and log into
 the system (DAMA group). Check if tokens are downloaded to
 the directory on your local hard drive (``/keybase/team/dama/`` 
-on Linux systems).
+on Linux and MacOS systems).
 
 Configure "conda-smithy"
-------------------------
+========================
 
 Create the directory ``~/.conda-smithy`` (in your home directory). 
 
@@ -78,11 +80,11 @@ to ``~/.conda-smithy``:
     $ cp /keybase/team/dama/azure.token .conda-smithy/
     $ cp /keybase/team/dama/github.token .conda-smithy/
 
-Create Directory for Packages
------------------------------
+Create Root Directory for Packages
+==================================
 
-Naming and location of the working directory is aribtrary. We assume
-that the directory `src/nsls-ii-forge/` in `HOME` directory is used:
+Naming and location of the root working directory is arbitrary. We will
+place packages in the directory ``~/src/nsls-ii-forge/``:
 
 .. code-block:: bash
 
@@ -91,7 +93,7 @@ that the directory `src/nsls-ii-forge/` in `HOME` directory is used:
     $ mkdir src/nsls-ii-forge
 
 Clone *event-model-feedstock* repository from GitHub
-----------------------------------------------------
+====================================================
 
 The **event-model-feedstock** needs to be cloned only once. In the process of
 creating packages we will be using file ``conda_build_config.yaml`` located
@@ -105,6 +107,7 @@ If you already have it cloned, pull the latest version of the
     $ git clone https://github.com/nsls-ii-forge/event-model-feedstock.git
 
 
+=======================================================
 Generate and Edit "meta.yaml" Recipe Configuration File
 =======================================================
 
@@ -124,7 +127,7 @@ There are several ways to create the package recipe:
     relative to ``HOME`` directory.
 
 Generate recipe from PyPI package
----------------------------------
+=================================
 
 If the package ``(package-name)`` is available from PyPI,
 generate the recipe from the existing package:
@@ -139,8 +142,9 @@ Check if ``meta.yaml`` was successfully created in
 
 Edit ``meta.yaml`` file:
 
-Remove all entries from host section except python and pip.
-Add ``requires`` and ``commands`` to the ``test`` section.
+Remove all entries from ``requirements: host:`` section except
+``python`` and ``pip``.
+Add ``requires:`` and ``commands:`` to the ``test:`` section.
 
 .. code-block::
 
@@ -149,7 +153,7 @@ Add ``requires`` and ``commands`` to the ``test`` section.
   commands:
     - pytest --pyargs sixtools.tests
 
-Remove the following lines from the ``about`` section:
+Remove the following lines from the ``about:`` section:
 
 .. code-block::
 
@@ -158,17 +162,18 @@ Remove the following lines from the ``about`` section:
 
 Additional steps:
 
-  -- Add license file name ``LICENSE`` to ``about`` section.
-  -- Update URL.
-  -- Remove the list of maintainers.
-  -- Remove ``extra`` block.
+  - Add license file name ``LICENSE`` to ``about:`` section.
+  - Update home URL in ``about:`` section to point to
+    the package's GitHub repository.
+  - Remove the list of maintainers.
+  - Remove ``extra:`` block.
 
 The example of edited ``meta.yaml`` for
 **sixtools** package may be found at the
 `sixtools-feedstock repository <https://github.com/nsls-ii-forge/sixtools-feedstock/blob/master/recipe/meta.yaml>`_.
 
 Manually create recipe or use the existing recipe
--------------------------------------------------
+=================================================
 
 This is alternative method of preparing the recipe if package is
 not available at PyPI. Create temporary directory:
@@ -201,13 +206,14 @@ Open and edit ``meta.yaml`` file.
 
     TODO: Some notes on editing ``meta.yaml`` file.
 
+====================
 Prepare Recipe Files
 ====================
 
 Collect additional files
-------------------------
+========================
 
-Copy ``conda_build_config.yaml`` files into your recipe directory:
+Copy ``conda_build_config.yaml`` file into your recipe directory:
 
 .. code-block:: bash
 
@@ -232,9 +238,9 @@ This is the contents of typical ``conda_build_config.yaml`` file:
     python:
     - '3.6'
 
-If you are building noarch package, then close the file without change.
-If you are building feedstock for arch packages and
-Python versions are specified in ``meta.yaml`` file, then remove the following lines:
+If you are building a noarch package, then close the file without change.
+For an arch package, a set of Python versions are specified in
+``meta.yaml`` file and the following lines should be removed:
 
 .. code-block::
 
@@ -263,11 +269,12 @@ should look similar to this:
     -rw-r--r-- 1 user user 1584 Sep 13 12:45 LICENSE
     -rw-r--r-- 1 user user 1064 Sep 13 12:10 meta.yaml
 
+===================================
 Generate Empty Feedstock Repository
 ===================================
 
 Initialize feedstock
---------------------
+====================
 
 Initialize feedstock using **conda-smithy**:
 
@@ -287,8 +294,8 @@ Replace ``conda-forge.yml`` in the feedstock directory with ``conda-forge.yml`` 
     $ cd ~/src/nsls-ii-forge
     $ cp event-model-feedstock/conda-forge.yml (package-name)-feedstock/
 
-Define Asure variables
-----------------------
+Define Azure variables
+======================
 
 .. code-block:: bash
 
@@ -297,7 +304,7 @@ Define Asure variables
 
 
 Create GitHub repository and push files
----------------------------------------
+=======================================
 
 .. code-block:: bash
 
@@ -309,7 +316,7 @@ Create GitHub repository and push files
     $ git push -u upstream master
 
 Enable CI on Azure pipelines
-----------------------------
+============================
 
 .. code-block:: bash
 
@@ -323,11 +330,12 @@ in the output:
 
     * nsls-ii-forge/inflection-feedstock has been enabled on azure pipelines
 
+======================================
 Rerender and Push Feedstock Repository
 ======================================
 
 Rerender the feedstock
-----------------------
+======================
 
 Create new branch ``rerender``:
 
@@ -355,6 +363,7 @@ Push changes to `upstream`:
     $ git push -u upstream rerender
 
 
+=============================
 Create pull request at GitHub
 =============================
 
@@ -363,30 +372,31 @@ and create pull request. In pull request comments include a brief note and **the
 repository** of the package (PyPI, conda-forge or GitHub).
 
 Closely examine build results to ensure that the packages were built for all systems
-and Python version and all tests passed successfully. Correct issues if necessary.
-Each time the change is made to configuration files, the feedstock must be
+and Python versions and all tests passed successfully. Correct issues if necessary.
+Each time a change is made to configuration files, the feedstock must be
 rerendered and changes must be committed and pushed. Merge the pull request once
 all issues are fixed.
 
+===================================================================
 Associate Anaconda Token from Variable Groups With the New Pipeline
 ===================================================================
 
 - Log into `dev.azure.com <https://dev.azure.com>`_. 
 - Select the pipeline named ``(package-name)-feedstock``.
 - Click ``Edit``.
-- Click a button with three vertical dots in the right top corner.
+- Click the button with three vertical dots in the right top corner.
 - Select 'Triggers' in the drop-down menu.
 - Open 'Variables' tab.
 - Select 'Variable groups'.
 - Click the button 'Link variable groups'.
 - Select 'Anaconda token'.
 
-
+======
 Issues
 ======
 
 Tests fail for Linux system due to missing OpenGL
--------------------------------------------------
+=================================================
 
 The solution is to place the file 
 `yum_requirements.txt <https://raw.githubusercontent.com/nsls-ii-forge/collection-feedstock/master/recipe/yum_requirements.txt>`_
