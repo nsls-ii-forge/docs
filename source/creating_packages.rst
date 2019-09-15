@@ -250,7 +250,7 @@ Initialize feedstock using ``conda-smithy``:
     $ cd ~/packages/(your-package-name)
     $ conda-smithy init (your-package-name)
 
-A new directory ``~packages/(your-package-name)/(your-package-name)-feedstock``
+A new directory ``~/packages/(your-package-name)/(your-package-name)-feedstock``
 is created.
 
 Replace ``conda-forge.yml`` in the feedstock directory with ``conda-forge.yml`` from
