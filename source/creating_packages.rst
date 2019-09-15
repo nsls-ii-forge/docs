@@ -6,6 +6,36 @@ Feedstocks for Azure pipelines may be generated based on
 existing PyPI or conda-forge packages, or directly from GitHub
 package repositories.
 
+Directory structure
+-------------------
+
+The following directory structure for the packaging project
+is recommended:
+
+``~/src/nsls-ii-forge/`` - root directory in which packages will be
+placed. This is only a recommended name. In practice, root
+directory may have arbitrary name and placed in any convenient spot.
+
+``~/src/nsls-ii-forge/event-model-feedstock`` -
+the directory with cloned **event-model-feedstock** repository.
+
+For each package we will create a temporary directory that may be deleted
+after feedstock initialize and the feedstock directory that will contain
+the feedstock repository:
+
+``~/src/nsls-ii-forge/(package_name)`` -
+the temporary directory with package recipe. The directory is
+created by **conda skeleton** or manually. The directory name has to
+match the package name, since this is the directory where
+**conda-smithy** will be looking for recipe
+(for example recipes for **sixtools** package
+must be placed in ``~/src/nsls-ii-forge/sixtools`` directory).
+
+``~/src/nsls-ii-forge/(package-name)-feedstock`` -
+the directory that contains the feedstock repository, which is
+uploaded to **nsls-ii-forge**. The directory is created by conda-smithy
+as part of feedstock initalization.
+
 Set up the Development Environment
 ==================================
 
@@ -52,70 +82,60 @@ Create Directory for Packages
 -----------------------------
 
 Naming and location of the working directory is aribtrary. We assume
-that the directory `packages` in `HOME` directory is used:
+that the directory `src/nsls-ii-forge/` in `HOME` directory is used:
 
 .. code-block:: bash
 
-    $ mkdir ~/packages
-    $ cd ~/packages
+    $ cd ~
+    $ mkdir src
+    $ mkdir src/nsls-ii-forge
 
 Clone *event-model-feedstock* repository from GitHub
 ----------------------------------------------------
 
-The *event-model-feedstock* needs to be cloned only once. In the process of
+The **event-model-feedstock** needs to be cloned only once. In the process of
 creating packages we will be using file ``conda_build_config.yaml`` located
-in `~/packages/event-model-feedstock/recipe/` directory. If you already
-have a clone of the feedstock, pull the latest version of the
-*event-model-feedstock* since GitHub repository may be updated.
+in ``~/src/nsls-ii-forge/event-model-feedstock/recipe/`` directory.
+If you already have it cloned, pull the latest version of the
+**event-model-feedstock** since the repository may be updated.
 
 .. code-block::
 
-    $ cd ~/packages
+    $ cd ~/src/nsls-ii-forge
     $ git clone https://github.com/nsls-ii-forge/event-model-feedstock.git
 
 
-Generate and Edit meta.yaml Recipe Configuration File
-=====================================================
-
-Create directory for your package `(your-package-name)`:
-
-.. code-block:: bash
-
-    $ cd ~/packages
-    $ mkdir (your-package-name)
-    $ cd (your-package-name)
-
-(You are now in the directory ``~/packages/(your-package-name)``)
-
-.. note::
-
-    It is important that each command is started with the correct
-    home directory. Since it is easy to lose track of
-    directory changes, all the paths will be specified 
-    relative to HOME directory.
-
+Generate and Edit "meta.yaml" Recipe Configuration File
+=======================================================
 
 There are several ways to create the package recipe:
 
 - generate recipe from existing PyPI package;
 
-- manually create ``meta.yaml`` recipe file using ``conda skeleton``;
+- manually create ``meta.yaml`` recipe file using **conda skeleton**;
 
 - use existing ``meta.yaml`` recipe file.
+
+.. note::
+
+    It is important that each of the following command
+    is run from the correct directory. Since it is easy to lose track of
+    directory changes, all the paths will be specified 
+    relative to ``HOME`` directory.
 
 Generate recipe from PyPI package
 ---------------------------------
 
-If the package ``(your-package-name)`` is available from PyPI, 
+If the package ``(package-name)`` is available from PyPI,
 generate the recipe from the existing package:
 
 .. code-block:: bash
 
-    $ cd ~/packages/(your-package-name)
-    $ conda skeleton pypi (your-package-name) --noarch
+    $ cd ~/src/nsls-ii-forge
+    $ conda skeleton pypi (package-name) --noarch
 
 Check if ``meta.yaml`` was successfully created in
-``~/packages/(your-package-name)/(your-package-name)`` directory.
+``~/src/nsls-ii-forge/(package-name)`` directory.
 
 Edit ``meta.yaml`` file:
 
@@ -143,23 +163,21 @@ Additional steps:
   -- Remove the list of maintainers.
   -- Remove ``extra`` block.
 
-The example of edited ``meta.yaml`` for successfully built
+The example of edited ``meta.yaml`` for
 **sixtools** package may be found at the
 `sixtools-feedstock repository <https://github.com/nsls-ii-forge/sixtools-feedstock/blob/master/recipe/meta.yaml>`_.
 
 Manually create recipe or use the existing recipe
 -------------------------------------------------
 
-Create temporary directory:
+This is alternative method of preparing the recipe if package is
+not available at PyPI. Create temporary directory:
 
 .. code-block:: bash
 
-    $ cd ~/packages/(your-package-name)
-    $ mkdir (your-package-name)
-    $ cd (your-package-name)
-
-(You are now in the directory 
-``~/packages/(your-package-name)/(your-package-name)``.)
+    $ cd ~/src/nsls-ii-forge
+    $ mkdir (package-name)
+    $ cd (package-name)
 
 The recipe may be created based on ``meta.yaml`` file from
 the original package repository. If such file is not available
@@ -193,10 +211,17 @@ Copy ``conda_build_config.yaml`` files into your recipe directory:
 
 .. code-block:: bash
 
-    $ cd ~/packages
-    $ cp event-model-feedstock/recipe/conda_build_config.yaml (your-package-name)/(your-package-name)/
+    $ cd ~/src/nsls-ii-forge
+    $ cp event-model-feedstock/recipe/conda_build_config.yaml (package-name)/
 
 Open and inspect ``conda_build_config.yaml``:
+
+.. code-block:: bash
+
+    $ cd ~/src/nsls-ii-forge/(package-name)
+    $ emacs conda_build_config.yaml &
+
+This is the contents of typical ``conda_build_config.yaml`` file:
 
 .. code-block::
 
@@ -207,26 +232,27 @@ Open and inspect ``conda_build_config.yaml``:
     python:
     - '3.6'
 
-If you are building noarch package, then close the file. For arch packages with
-Python versions specified in ``meta.yaml`` file remove the following lines:
+If you are building noarch package, then close the file without change.
+If you are building feedstock for arch packages and
+Python versions are specified in ``meta.yaml`` file, then remove the following lines:
 
 .. code-block::
 
     python:
     - '3.6'
 
-Copy licence file from the package repository into the recipe directory.
+Copy licence file from the original package repository into the recipe directory.
 The file must be named ``LICENSE`` (without extension). For example, BSD license 
 used for Bluesky project may be copied to recipes as
 
 .. code-block:: bash
     
-    cd ~/recipes/(your-package-name)/(your-package-name)
+    cd ~/src/nsls-ii-forge/(package-name)
     wget https://raw.githubusercontent.com/bluesky/bluesky/master/LICENSE
 
 
 Now the content of the recipe directory 
-``~/packages/(your-package-name)/(your-package-name)``
+``~/src/nsns-ii-forge/(package-name)``
 should look similar to this:
 
 .. code-block:: bash
@@ -243,14 +269,14 @@ Generate Empty Feedstock Repository
 Initialize feedstock
 --------------------
 
-Initialize feedstock using ``conda-smithy``:
+Initialize feedstock using **conda-smithy**:
 
 .. code-block:: bash
 
-    $ cd ~/packages/(your-package-name)
-    $ conda-smithy init (your-package-name)
+    $ cd ~/src/nsls-ii-forge
+    $ conda-smithy init (package-name)
 
-A new directory ``~/packages/(your-package-name)/(your-package-name)-feedstock``
+A new directory ``~/src/nsls-ii-forge/(package-name)-feedstock``
 is created.
 
 Replace ``conda-forge.yml`` in the feedstock directory with ``conda-forge.yml`` from
@@ -258,8 +284,8 @@ Replace ``conda-forge.yml`` in the feedstock directory with ``conda-forge.yml`` 
 
 .. code-block:: bash
 
-    $ cd ~/packages
-    $ cp event-model-feedstock/conda-forge.yml (your-package-name)/(your-package-name)-feedstock/
+    $ cd ~/src/nsls-ii-forge
+    $ cp event-model-feedstock/conda-forge.yml (package-name)-feedstock/
 
 Define Asure variables
 ----------------------
@@ -275,10 +301,11 @@ Create GitHub repository and push files
 
 .. code-block:: bash
 
-    $ cd ~/packages/(your-package-name)/(your-package-name)-feedstock
+    $ cd ~/src/nsls-ii-forge/(package-name)-feedstock
     $ conda smithy register-github --organization nsls-ii-forge ./
     $ git add .
     $ git commit -m "Initial commit"
+    $ git status
     $ git push -u upstream master
 
 Enable CI on Azure pipelines
@@ -292,7 +319,7 @@ Enable CI on Azure pipelines
 Verify that CI was enabled on Azure pipelines. Check for the following line 
 in the output:
 
-.. code-block:: bash
+.. code-block::
 
     * nsls-ii-forge/inflection-feedstock has been enabled on azure pipelines
 
@@ -331,7 +358,7 @@ Push changes to `upstream`:
 Create pull request at GitHub
 =============================
 
-Open github page ``https://github.com/nsls-ii-forge/(your-package-name)-feedstock``
+Open github page ``https://github.com/nsls-ii-forge/(package-name)-feedstock``
 and create pull request. In pull request comments include a brief note and **the link to the original 
 repository** of the package (PyPI, conda-forge or GitHub).
 
@@ -345,7 +372,7 @@ Associate Anaconda Token from Variable Groups With the New Pipeline
 ===================================================================
 
 - Log into `dev.azure.com <https://dev.azure.com>`_. 
-- Select the pipeline named ``(your-package-name)-feedstock``. 
+- Select the pipeline named ``(package-name)-feedstock``.
 - Click ``Edit``.
 - Click a button with three vertical dots in the right top corner.
 - Select 'Triggers' in the drop-down menu.
@@ -364,5 +391,5 @@ Tests fail for Linux system due to missing OpenGL
 The solution is to place the file 
 `yum_requirements.txt <https://raw.githubusercontent.com/nsls-ii-forge/collection-feedstock/master/recipe/yum_requirements.txt>`_
 into the recipes directory 
-``~/packages/(your-package-name)/(your-package-name)-feedstock/recipes``, 
+``~/src/nsls-ii-forge/(package-name)-feedstock/recipes``,
 then rerender, commit and push changes.
