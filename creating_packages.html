@@ -1,0 +1,577 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Creating Packages &mdash; docs  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+        <script type="text/javascript" src="_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="NSLS-II-FORGE - Documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> docs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Creating Packages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#directory-structure">Directory structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-the-development-environment">Set up the development environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-conda-smithy">Install “conda-smithy”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-keybase">Install Keybase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-conda-smithy">Configure “conda-smithy”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-root-directory-for-packages">Create root directory for packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clone-event-model-feedstock-repository-from-github">Clone “event-model-feedstock” repository from GitHub</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#generate-and-edit-meta-yaml-recipe-configuration-file">Generate and edit <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> recipe configuration file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#generate-recipe-from-pypi-package">Generate recipe from PyPI package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manually-create-a-recipe-or-use-the-existing-recipe">Manually create a recipe or use the existing recipe</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#prepare-recipe-files">Prepare recipe files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#collect-additional-files">Collect additional files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#generate-empty-feedstock-repository">Generate empty feedstock repository</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initialize-feedstock">Initialize feedstock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#define-azure-variables">Define Azure variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-github-repository-and-push-files">Create GitHub repository and push files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enable-ci-on-azure-pipelines">Enable CI on Azure Pipelines</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#rerender-and-push-feedstock-repository">Rerender and push feedstock repository</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rerender-the-feedstock">Rerender the feedstock</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#associate-anaconda-token-from-variable-groups-with-the-new-pipeline">Associate Anaconda token from variable groups with the new pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-pull-request-at-github">Create pull request at GitHub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#issues">Issues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tests-fail-for-linux-system-due-to-missing-opengl">Tests fail for Linux system due to missing OpenGL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Creating Packages</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/creating_packages.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="creating-packages">
+<h1>Creating Packages<a class="headerlink" href="#creating-packages" title="Permalink to this headline">¶</a></h1>
+<p>Feedstocks for Azure pipelines may be generated based on the following sources
+(listed in the order of preference):</p>
+<ul class="simple">
+<li><p>conda-forge feedstocks;</p></li>
+<li><p>PyPI packages;</p></li>
+<li><p>package recipes from
+<a class="reference external" href="https://github.com/NSLS-II/lightsource2-recipes/tree/master/recipes-tag">lightsource2-recipes</a>.</p></li>
+</ul>
+<p>For a new package, the recipes (in the form of <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file) can be created
+manually from a generic template for <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file and specific package requirements.</p>
+<div class="section" id="directory-structure">
+<h2>Directory structure<a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h2>
+<p>The following directory structure for the packaging project
+is recommended:</p>
+<p><code class="docutils literal notranslate"><span class="pre">~/src/nsls-ii-forge/</span></code> - root directory in which packages will be
+placed. This is only a recommended name. In practice, root
+directory may have arbitrary name and placed in any convenient spot.</p>
+<p><code class="docutils literal notranslate"><span class="pre">~/src/nsls-ii-forge/event-model-feedstock</span></code> -
+the directory with cloned <strong>event-model-feedstock</strong> repository.</p>
+<p>For each package we will create a temporary directory that may be deleted
+after a feedstock is initialized and the feedstock directory that will contain
+the feedstock repository:</p>
+<p><code class="docutils literal notranslate"><span class="pre">~/src/nsls-ii-forge/&lt;package_name&gt;</span></code> -
+a temporary directory with the package’s recipe. The directory is
+created by <strong>conda skeleton</strong> or manually. The directory name has to
+match the package name, since this is the directory where
+<strong>conda-smithy</strong> will be looking for the recipe file <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>
+(for example, recipes for <strong>sixtools</strong> package
+must be placed in <code class="docutils literal notranslate"><span class="pre">~/src/nsls-ii-forge/sixtools</span></code> directory).</p>
+<p><code class="docutils literal notranslate"><span class="pre">~/src/nsls-ii-forge/&lt;package-name&gt;-feedstock</span></code> -
+a directory that contains the feedstock repository, which is
+uploaded to the corresponding repository in the <strong>nsls-ii-forge</strong>
+GitHub organization.
+The directory is created by <strong>conda-smithy</strong>
+as a part of feedstock initialization.</p>
+</div>
+<div class="section" id="set-up-the-development-environment">
+<h2>Set up the development environment<a class="headerlink" href="#set-up-the-development-environment" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="install-conda-smithy">
+<h3>Install “conda-smithy”<a class="headerlink" href="#install-conda-smithy" title="Permalink to this headline">¶</a></h3>
+<p>Create a new conda environment (let’s name it <code class="docutils literal notranslate"><span class="pre">smithy</span></code>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conda create -n smithy -c conda-forge conda-smithy <span class="s2">&quot;python&gt;=3&quot;</span>
+$ conda activate smithy
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-keybase">
+<h3>Install Keybase<a class="headerlink" href="#install-keybase" title="Permalink to this headline">¶</a></h3>
+<p>Use the <a class="reference external" href="https://keybase.io/download">installation instructions</a>
+to download and install <strong>Keybase</strong>. Start <strong>Keybase</strong> and log into
+the system (DAMA group). Check if tokens are downloaded to
+the directory on your local hard drive (<code class="docutils literal notranslate"><span class="pre">/keybase/team/dama/</span></code>
+on Linux and MacOS systems).</p>
+</div>
+<div class="section" id="configure-conda-smithy">
+<h3>Configure “conda-smithy”<a class="headerlink" href="#configure-conda-smithy" title="Permalink to this headline">¶</a></h3>
+<p>Create the directory <code class="docutils literal notranslate"><span class="pre">~/.conda-smithy</span></code> (in your home directory).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mkdir ~/.conda-smithy
+</pre></div>
+</div>
+<p>Copy tokens named <code class="docutils literal notranslate"><span class="pre">anaconda.token</span></code>, <code class="docutils literal notranslate"><span class="pre">azure.token</span></code> and <code class="docutils literal notranslate"><span class="pre">github.token</span></code>
+to <code class="docutils literal notranslate"><span class="pre">~/.conda-smithy</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cp /keybase/team/dama/anaconda.token ~/.conda-smithy/
+$ cp /keybase/team/dama/azure.token ~/.conda-smithy/
+$ cp /keybase/team/dama/github.token ~/.conda-smithy/
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-root-directory-for-packages">
+<h3>Create root directory for packages<a class="headerlink" href="#create-root-directory-for-packages" title="Permalink to this headline">¶</a></h3>
+<p>Naming and location of the root working directory is arbitrary. We will
+place packages in the directory <code class="docutils literal notranslate"><span class="pre">~/src/nsls-ii-forge/</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mkdir -p ~/src/nsls-ii-forge
+</pre></div>
+</div>
+</div>
+<div class="section" id="clone-event-model-feedstock-repository-from-github">
+<h3>Clone “event-model-feedstock” repository from GitHub<a class="headerlink" href="#clone-event-model-feedstock-repository-from-github" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>event-model-feedstock</strong> needs to be cloned only once. In the process of
+creating packages we will be using the <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code> file located
+in <code class="docutils literal notranslate"><span class="pre">~/src/nsls-ii-forge/event-model-feedstock/recipe/</span></code> directory.
+If you already have it cloned, pull the latest version of the
+<strong>event-model-feedstock</strong> since the repository may be updated.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd ~/src/nsls-ii-forge
+$ git clone https://github.com/nsls-ii-forge/event-model-feedstock.git
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="generate-and-edit-meta-yaml-recipe-configuration-file">
+<h2>Generate and edit <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> recipe configuration file<a class="headerlink" href="#generate-and-edit-meta-yaml-recipe-configuration-file" title="Permalink to this headline">¶</a></h2>
+<p>There are several ways to create the package recipe:</p>
+<ul class="simple">
+<li><p>use existing <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> recipe file (e.g. from <strong>conda-forge</strong> package);</p></li>
+<li><p>generate recipe from existing PyPI package using <strong>conda skeleton</strong>;</p></li>
+<li><p>manually create <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> recipe file.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is important that each of the following command
+is run from the correct directory. Since it is easy to lose track of
+directory changes, all the paths will be specified
+relative to the <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory.</p>
+</div>
+<div class="section" id="generate-recipe-from-pypi-package">
+<h3>Generate recipe from PyPI package<a class="headerlink" href="#generate-recipe-from-pypi-package" title="Permalink to this headline">¶</a></h3>
+<p>If the package <code class="docutils literal notranslate"><span class="pre">&lt;package-name&gt;</span></code> is available from PyPI,
+generate the recipe from the existing package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/src/nsls-ii-forge
+$ conda skeleton pypi &lt;package-name&gt; --noarch
+</pre></div>
+</div>
+<p>Check if <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> was successfully created in
+<code class="docutils literal notranslate"><span class="pre">~/src/nsls-ii-forge/&lt;package-name&gt;</span></code> directory.</p>
+<p>Edit the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file:</p>
+<p>Remove all entries from the <code class="docutils literal notranslate"><span class="pre">requirements:</span> <span class="pre">host:</span></code> section except
+<code class="docutils literal notranslate"><span class="pre">python</span></code> and <code class="docutils literal notranslate"><span class="pre">pip</span></code>.
+Add <code class="docutils literal notranslate"><span class="pre">requires:</span></code> and <code class="docutils literal notranslate"><span class="pre">commands:</span></code> to the <code class="docutils literal notranslate"><span class="pre">test:</span></code> section
+(if applicable).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">requires</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">pytest</span>
+<span class="n">commands</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">pytest</span> <span class="o">--</span><span class="n">pyargs</span> <span class="n">sixtools</span><span class="o">.</span><span class="n">tests</span>
+</pre></div>
+</div>
+<p>Remove the following lines from the <code class="docutils literal notranslate"><span class="pre">about:</span></code> section:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">doc_url</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+<span class="n">dev_url</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+</pre></div>
+</div>
+<p>Additional steps:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code> to the <code class="docutils literal notranslate"><span class="pre">license_file_name</span></code> field of the <code class="docutils literal notranslate"><span class="pre">about:</span></code> section.</p></li>
+<li><p>Update the home URL in <code class="docutils literal notranslate"><span class="pre">about:</span></code> section to point to
+the package’s GitHub repository or a dedicated web site if it exists.</p></li>
+<li><p>Remove the <code class="docutils literal notranslate"><span class="pre">extra:</span></code> block (including the list of maintainers).</p></li>
+</ul>
+</div></blockquote>
+<p>An example of the edited <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> for the
+<strong>sixtools</strong> package may be found at the
+<a class="reference external" href="https://github.com/nsls-ii-forge/sixtools-feedstock/blob/master/recipe/meta.yaml">sixtools-feedstock repository</a>.</p>
+</div>
+<div class="section" id="manually-create-a-recipe-or-use-the-existing-recipe">
+<h3>Manually create a recipe or use the existing recipe<a class="headerlink" href="#manually-create-a-recipe-or-use-the-existing-recipe" title="Permalink to this headline">¶</a></h3>
+<p>This is an alternative method of preparing the recipe if the package is
+not available at PyPI. Create a temporary directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/src/nsls-ii-forge
+$ mkdir &lt;package-name&gt;
+$ <span class="nb">cd</span> &lt;package-name&gt;
+</pre></div>
+</div>
+<p>The recipe may be created based on <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file from
+the respective <strong>conda-forge</strong> feedstock (and sometimes from the original package repository).
+If such file is not available
+or unusable, find an appropriate sample <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> (from
+a similar package that was successfully built) and modify it.
+Copy <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file to the temporary directory you just created:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cp &lt;path-to-meta-yaml-file&gt;/meta.yml .
+</pre></div>
+</div>
+<p>or download <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> from a known URL:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ wget https://&lt;url-of-meta-yaml-file&gt;/meta.yaml
+</pre></div>
+</div>
+<p>Open and edit the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file.</p>
+</div>
+</div>
+<div class="section" id="prepare-recipe-files">
+<h2>Prepare recipe files<a class="headerlink" href="#prepare-recipe-files" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="collect-additional-files">
+<h3>Collect additional files<a class="headerlink" href="#collect-additional-files" title="Permalink to this headline">¶</a></h3>
+<p>Copy the <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code> file into your recipe directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/src/nsls-ii-forge
+$ cp event-model-feedstock/recipe/conda_build_config.yaml &lt;package-name&gt;/
+</pre></div>
+</div>
+<p>Open and inspect <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/src/nsls-ii-forge/&lt;package-name&gt;
+$ emacs conda_build_config.yaml <span class="p">&amp;</span>
+</pre></div>
+</div>
+<p>This is the contents of a typical <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">channel_sources</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">nsls2forge</span><span class="p">,</span><span class="n">defaults</span>
+<span class="n">channel_targets</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">nsls2forge</span> <span class="n">main</span>
+<span class="n">python</span><span class="p">:</span>
+<span class="o">-</span> <span class="s1">&#39;3.6&#39;</span>
+</pre></div>
+</div>
+<p>If you are building a noarch package, then close the file without change.
+For an architecture-dependent package, a set of Python versions are specified in
+<code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file and the following lines should be removed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span><span class="p">:</span>
+<span class="o">-</span> <span class="s1">&#39;3.6&#39;</span>
+</pre></div>
+</div>
+<p>Copy the license file from the original package repository into the recipe directory.
+The license file is typically named <code class="docutils literal notranslate"><span class="pre">LICENSE`</span> <span class="pre">(without</span> <span class="pre">extension),</span> <span class="pre">but</span> <span class="pre">in</span> <span class="pre">some</span> <span class="pre">projects</span>
+<span class="pre">the</span> <span class="pre">name</span> <span class="pre">may</span> <span class="pre">differ</span> <span class="pre">(e.g.</span> <span class="pre">COPYRIGHT).</span> <span class="pre">The</span> <span class="pre">spelling</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">license</span> <span class="pre">file</span> <span class="pre">name</span> <span class="pre">should</span>
+<span class="pre">match</span> <span class="pre">the</span> <span class="pre">name</span> <span class="pre">specified</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">``license_file_name</span></code> field of
+the <code class="docutils literal notranslate"><span class="pre">about:</span></code> section of the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file
+(see the instruction above). For example, BSD license
+used for Bluesky project may be copied to recipes as</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/src/nsls-ii-forge/&lt;package-name&gt;
+wget https://raw.githubusercontent.com/bluesky/bluesky/master/LICENSE
+</pre></div>
+</div>
+<p>Now the content of the recipe directory
+<code class="docutils literal notranslate"><span class="pre">~/src/nsns-ii-forge/&lt;package-name&gt;</span></code>
+should look similar to this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>drwxr-xr-x <span class="m">2</span> user user <span class="m">4096</span> Sep <span class="m">13</span> <span class="m">12</span>:45 .
+drwxr-xr-x <span class="m">3</span> user user <span class="m">4096</span> Sep <span class="m">13</span> <span class="m">12</span>:10 ..
+-rw-r--r-- <span class="m">1</span> user user   <span class="m">96</span> Sep <span class="m">13</span> <span class="m">12</span>:44 conda_build_config.yaml
+-rw-r--r-- <span class="m">1</span> user user <span class="m">1584</span> Sep <span class="m">13</span> <span class="m">12</span>:45 LICENSE
+-rw-r--r-- <span class="m">1</span> user user <span class="m">1064</span> Sep <span class="m">13</span> <span class="m">12</span>:10 meta.yaml
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="generate-empty-feedstock-repository">
+<h2>Generate empty feedstock repository<a class="headerlink" href="#generate-empty-feedstock-repository" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="initialize-feedstock">
+<h3>Initialize feedstock<a class="headerlink" href="#initialize-feedstock" title="Permalink to this headline">¶</a></h3>
+<p>Initialize feedstock using <strong>conda-smithy</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/src/nsls-ii-forge
+$ conda-smithy init &lt;package-name&gt;
+</pre></div>
+</div>
+<p>A new directory <code class="docutils literal notranslate"><span class="pre">~/src/nsls-ii-forge/&lt;package-name&gt;-feedstock</span></code>
+is created.</p>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> in the feedstock directory with <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> from
+<code class="docutils literal notranslate"><span class="pre">event-model-feedstock</span></code> package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/src/nsls-ii-forge
+$ cp event-model-feedstock/conda-forge.yml &lt;package-name&gt;-feedstock/
+</pre></div>
+</div>
+</div>
+<div class="section" id="define-azure-variables">
+<h3>Define Azure variables<a class="headerlink" href="#define-azure-variables" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">export</span> <span class="nv">AZURE_ORG_OR_USER</span><span class="o">=</span>nsls2forge
+$ <span class="nb">export</span> <span class="nv">AZURE_PROJECT_NAME</span><span class="o">=</span>nsls2forge
+</pre></div>
+</div>
+<p>For convenience, the above lines may be added to the <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file
+so that the environment variables are always available.</p>
+</div>
+<div class="section" id="create-github-repository-and-push-files">
+<h3>Create GitHub repository and push files<a class="headerlink" href="#create-github-repository-and-push-files" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/src/nsls-ii-forge/&lt;package-name&gt;-feedstock
+$ conda smithy register-github --organization nsls-ii-forge ./
+$ git add .
+$ git commit -m <span class="s2">&quot;Initial commit&quot;</span>
+$ git status
+$ git push -u upstream master
+</pre></div>
+</div>
+</div>
+<div class="section" id="enable-ci-on-azure-pipelines">
+<h3>Enable CI on Azure Pipelines<a class="headerlink" href="#enable-ci-on-azure-pipelines" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conda smithy register-ci --organization nsls-ii-forge --without-circle <span class="se">\</span>
+--without-appveyor --without-travis --without-drone --feedstock_directory ./
+</pre></div>
+</div>
+<p>Verify that CI was enabled on Azure Pipelines. Check for the following line
+in the output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span> <span class="n">nsls</span><span class="o">-</span><span class="n">ii</span><span class="o">-</span><span class="n">forge</span><span class="o">/&lt;</span><span class="n">package</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;-</span><span class="n">feedstock</span> <span class="n">has</span> <span class="n">been</span> <span class="n">enabled</span> <span class="n">on</span> <span class="n">azure</span> <span class="n">pipelines</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="rerender-and-push-feedstock-repository">
+<h2>Rerender and push feedstock repository<a class="headerlink" href="#rerender-and-push-feedstock-repository" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="rerender-the-feedstock">
+<h3>Rerender the feedstock<a class="headerlink" href="#rerender-the-feedstock" title="Permalink to this headline">¶</a></h3>
+<p>Create a new branch <code class="docutils literal notranslate"><span class="pre">rerender</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git checkout -b rerender
+</pre></div>
+</div>
+<p>Rerender the feedstock:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conda smithy rerender --feedstock_directory .
+</pre></div>
+</div>
+<p>Commit the changes (the following command should be copied from the terminal output
+produced by the previous command):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git commit -m <span class="s2">&quot;MNT: Re-rendered with conda-build 3.18.9, conda-smithy 3.4.6, and conda-forge-pinning 2019.09.08&quot;</span>
+</pre></div>
+</div>
+<p>Push changes to <cite>upstream</cite>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git push -u upstream rerender
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="associate-anaconda-token-from-variable-groups-with-the-new-pipeline">
+<h2>Associate Anaconda token from variable groups with the new pipeline<a class="headerlink" href="#associate-anaconda-token-from-variable-groups-with-the-new-pipeline" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Log into <a class="reference external" href="https://dev.azure.com">dev.azure.com</a>.</p></li>
+<li><p>Select the pipeline named <code class="docutils literal notranslate"><span class="pre">&lt;package-name&gt;-feedstock</span></code>.</p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Edit</span></code>.</p></li>
+<li><p>Click the button with three vertical dots in the right top corner.</p></li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">Triggers</span></code> in the drop-down menu.</p></li>
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">Variables</span></code> tab.</p></li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">Variable</span> <span class="pre">groups</span></code>.</p></li>
+<li><p>Click the <code class="docutils literal notranslate"><span class="pre">Link</span> <span class="pre">variable</span> <span class="pre">group</span></code> button.</p></li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">Anaconda</span> <span class="pre">token</span></code> and link it to the pipeline.</p></li>
+<li><p>Save changes (do not queue).</p></li>
+</ul>
+</div>
+<div class="section" id="create-pull-request-at-github">
+<h2>Create pull request at GitHub<a class="headerlink" href="#create-pull-request-at-github" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Anaconda token must be associated with the new Azure Pipeline before the pull
+request is merged. It is a good practice to associate the token before
+pull request is created.</p>
+</div>
+<p>Open github page <code class="docutils literal notranslate"><span class="pre">https://github.com/nsls-ii-forge/&lt;package-name&gt;-feedstock</span></code>
+and create pull request. In pull request comments include a brief note and <strong>the link to the original
+repository</strong> of the package (PyPI, conda-forge or GitHub).</p>
+<p>Closely examine build results to ensure that the packages were built for all target systems
+and Python versions and all tests passed successfully. Correct issues if necessary.
+Each time a change is made to configuration files, the feedstock must be
+rerendered and changes must be committed and pushed. Merge the pull request once
+all issues are fixed.</p>
+</div>
+<div class="section" id="issues">
+<h2>Issues<a class="headerlink" href="#issues" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="tests-fail-for-linux-system-due-to-missing-opengl">
+<h3>Tests fail for Linux system due to missing OpenGL<a class="headerlink" href="#tests-fail-for-linux-system-due-to-missing-opengl" title="Permalink to this headline">¶</a></h3>
+<p>The solution is to place the file
+<a class="reference external" href="https://raw.githubusercontent.com/nsls-ii-forge/collection-feedstock/master/recipe/yum_requirements.txt">yum_requirements.txt</a>
+into the recipes directory
+<code class="docutils literal notranslate"><span class="pre">~/src/nsls-ii-forge/&lt;package-name&gt;-feedstock/recipes</span></code>,
+then rerender, commit and push changes.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="NSLS-II-FORGE - Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Documentation for NSLS-II Forge
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
