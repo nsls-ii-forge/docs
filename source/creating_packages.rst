@@ -2,9 +2,18 @@
 Creating Packages
 #################
 
-Feedstocks for Azure pipelines may be generated based on
-existing PyPI packages or conda-forge feedstocks, or directly from GitHub
-package repositories.
+Feedstocks for Azure pipelines may be generated based on the following sources
+(listed in the order of preference):
+
+- conda-forge feedstocks;
+
+- PyPI packages;
+
+- package recipes from
+  `lightsource2-recipes <https://github.com/NSLS-II/lightsource2-recipes/tree/master/recipes-tag>`_.
+
+For a new package, the recipes (in the form of ``meta.yaml`` file) can be created
+manually from a generic template for ``meta.yaml`` file and specific package requirements.
 
 ===================
 Directory structure
@@ -32,13 +41,13 @@ match the package name, since this is the directory where
 (for example recipes for **sixtools** package
 must be placed in ``~/src/nsls-ii-forge/sixtools`` directory).
 
-``~/src/nsls-ii-forge/(package-name)-feedstock`` -
+``~/src/nsls-ii-forge/<package-name>-feedstock`` -
 the directory that contains the feedstock repository, which is
 uploaded to **nsls-ii-forge**. The directory is created by conda-smithy
 as part of feedstock initalization.
 
 ==================================
-Set up the Development Environment
+Set up the development environment
 ==================================
 
 Install "conda-smithy"
@@ -80,7 +89,7 @@ to ``~/.conda-smithy``:
     $ cp /keybase/team/dama/azure.token .conda-smithy/
     $ cp /keybase/team/dama/github.token .conda-smithy/
 
-Create Root Directory for Packages
+Create root directory for packages
 ==================================
 
 Naming and location of the root working directory is arbitrary. We will
@@ -129,16 +138,16 @@ There are several ways to create the package recipe:
 Generate recipe from PyPI package
 =================================
 
-If the package ``(package-name)`` is available from PyPI,
+If the package ``<package-name>`` is available from PyPI,
 generate the recipe from the existing package:
 
 .. code-block:: bash
 
     $ cd ~/src/nsls-ii-forge
-    $ conda skeleton pypi (package-name) --noarch
+    $ conda skeleton pypi <package-name> --noarch
 
 Check if ``meta.yaml`` was successfully created in
-``~/src/nsls-ii-forge/(package-name)`` directory.
+``~/src/nsls-ii-forge/<package-name>`` directory.
 
 Edit ``meta.yaml`` file:
 
@@ -181,8 +190,8 @@ not available at PyPI. Create temporary directory:
 .. code-block:: bash
 
     $ cd ~/src/nsls-ii-forge
-    $ mkdir (package-name)
-    $ cd (package-name)
+    $ mkdir <package-name>
+    $ cd <package-name>
 
 The recipe may be created based on ``meta.yaml`` file from
 the original package repository. If such file is not available
@@ -192,13 +201,13 @@ Copy ``meta.yaml`` file to the temporary directory you just created:
 
 .. code-block:: bash
 
-    $ cp (path-to-meta-yaml-file)/meta.yml .
+    $ cp <path-to-meta-yaml-file>/meta.yml .
 
 or download ``meta.yaml`` from known URL:
 
 .. code-block:: bash
 
-    $ wget https://(url-of-meta-yaml-file)/meta.yaml
+    $ wget https://<url-of-meta-yaml-file>/meta.yaml
 
 Open and edit ``meta.yaml`` file.
 
@@ -207,7 +216,7 @@ Open and edit ``meta.yaml`` file.
     TODO: Some notes on editing ``meta.yaml`` file.
 
 ====================
-Prepare Recipe Files
+Prepare recipe files
 ====================
 
 Collect additional files
@@ -218,13 +227,13 @@ Copy ``conda_build_config.yaml`` file into your recipe directory:
 .. code-block:: bash
 
     $ cd ~/src/nsls-ii-forge
-    $ cp event-model-feedstock/recipe/conda_build_config.yaml (package-name)/
+    $ cp event-model-feedstock/recipe/conda_build_config.yaml <package-name>/
 
 Open and inspect ``conda_build_config.yaml``:
 
 .. code-block:: bash
 
-    $ cd ~/src/nsls-ii-forge/(package-name)
+    $ cd ~/src/nsls-ii-forge/<package-name>
     $ emacs conda_build_config.yaml &
 
 This is the contents of typical ``conda_build_config.yaml`` file:
@@ -253,12 +262,12 @@ used for Bluesky project may be copied to recipes as
 
 .. code-block:: bash
     
-    cd ~/src/nsls-ii-forge/(package-name)
+    cd ~/src/nsls-ii-forge/<package-name>
     wget https://raw.githubusercontent.com/bluesky/bluesky/master/LICENSE
 
 
 Now the content of the recipe directory 
-``~/src/nsns-ii-forge/(package-name)``
+``~/src/nsns-ii-forge/<package-name>``
 should look similar to this:
 
 .. code-block:: bash
@@ -270,7 +279,7 @@ should look similar to this:
     -rw-r--r-- 1 user user 1064 Sep 13 12:10 meta.yaml
 
 ===================================
-Generate Empty Feedstock Repository
+Generate empty feedstock repository
 ===================================
 
 Initialize feedstock
@@ -281,9 +290,9 @@ Initialize feedstock using **conda-smithy**:
 .. code-block:: bash
 
     $ cd ~/src/nsls-ii-forge
-    $ conda-smithy init (package-name)
+    $ conda-smithy init <package-name>
 
-A new directory ``~/src/nsls-ii-forge/(package-name)-feedstock``
+A new directory ``~/src/nsls-ii-forge/<package-name>-feedstock``
 is created.
 
 Replace ``conda-forge.yml`` in the feedstock directory with ``conda-forge.yml`` from
@@ -292,7 +301,7 @@ Replace ``conda-forge.yml`` in the feedstock directory with ``conda-forge.yml`` 
 .. code-block:: bash
 
     $ cd ~/src/nsls-ii-forge
-    $ cp event-model-feedstock/conda-forge.yml (package-name)-feedstock/
+    $ cp event-model-feedstock/conda-forge.yml <package-name>-feedstock/
 
 Define Azure variables
 ======================
@@ -308,7 +317,7 @@ Create GitHub repository and push files
 
 .. code-block:: bash
 
-    $ cd ~/src/nsls-ii-forge/(package-name)-feedstock
+    $ cd ~/src/nsls-ii-forge/<package-name>-feedstock
     $ conda smithy register-github --organization nsls-ii-forge ./
     $ git add .
     $ git commit -m "Initial commit"
@@ -331,7 +340,7 @@ in the output:
     * nsls-ii-forge/inflection-feedstock has been enabled on azure pipelines
 
 ======================================
-Rerender and Push Feedstock Repository
+Rerender and push feedstock repository
 ======================================
 
 Rerender the feedstock
@@ -362,13 +371,33 @@ Push changes to `upstream`:
 
     $ git push -u upstream rerender
 
+===================================================================
+Associate Anaconda token from variable groups with the new pipeline
+===================================================================
+
+- Log into `dev.azure.com <https://dev.azure.com>`_. 
+- Select the pipeline named ``<package-name>-feedstock``.
+- Click ``Edit``.
+- Click the button with three vertical dots in the right top corner.
+- Select ``Triggers`` in the drop-down menu.
+- Open ``Variables`` tab.
+- Select ``Variable groups``.
+- Click the button 'Link variable groups'.
+- Select ``Anaconda token`` and link it to the pipeline.
+- Save changes (do not queue).
 
 =============================
 Create pull request at GitHub
 =============================
 
-Open github page ``https://github.com/nsls-ii-forge/(package-name)-feedstock``
-and create pull request. In pull request comments include a brief note and **the link to the original 
+.. note::
+
+    Anaconda token must be associated with the new pipeline before the pull
+    request is merged. It is a good practice to associate the token before
+    pull request is created.
+
+Open github page ``https://github.com/nsls-ii-forge/<package-name>-feedstock``
+and create pull request. In pull request comments include a brief note and **the link to the original
 repository** of the package (PyPI, conda-forge or GitHub).
 
 Closely examine build results to ensure that the packages were built for all systems
@@ -377,20 +406,6 @@ Each time a change is made to configuration files, the feedstock must be
 rerendered and changes must be committed and pushed. Merge the pull request once
 all issues are fixed.
 
-===================================================================
-Associate Anaconda Token from Variable Groups With the New Pipeline
-===================================================================
-
-- Log into `dev.azure.com <https://dev.azure.com>`_. 
-- Select the pipeline named ``(package-name)-feedstock``.
-- Click ``Edit``.
-- Click the button with three vertical dots in the right top corner.
-- Select 'Triggers' in the drop-down menu.
-- Open ``Variables`` tab.
-- Select ``Variable groups``.
-- Click the button 'Link variable groups'.
-- Select ``Anaconda token`` and link it to the pipeline.
-- Save changes (do not queue).
 
 ======
 Issues
