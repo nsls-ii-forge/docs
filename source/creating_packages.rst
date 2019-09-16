@@ -37,8 +37,8 @@ the feedstock repository:
 a temporary directory with the package's recipe. The directory is
 created by **conda skeleton** or manually. The directory name has to
 match the package name, since this is the directory where
-**conda-smithy** will be looking for recipe
-(for example recipes for **sixtools** package
+**conda-smithy** will be looking for the recipe file ``meta.yaml``
+(for example, recipes for **sixtools** package
 must be placed in ``~/src/nsls-ii-forge/sixtools`` directory).
 
 ``~/src/nsls-ii-forge/<package-name>-feedstock`` -
@@ -382,7 +382,7 @@ Associate Anaconda token from variable groups with the new pipeline
 - Select ``Triggers`` in the drop-down menu.
 - Open ``Variables`` tab.
 - Select ``Variable groups``.
-- Click the button 'Link variable groups'.
+- Click the ``Link variable group`` button.
 - Select ``Anaconda token`` and link it to the pipeline.
 - Save changes (do not queue).
 
