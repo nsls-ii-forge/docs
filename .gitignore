@@ -10,6 +10,7 @@ __pycache__/
 .Python
 env/
 build/
+source/_build
 develop-eggs/
 dist/
 downloads/
@@ -73,7 +74,10 @@ target/
 *.swo
 
 #pycharm
-.idea/*
+.idea/
+
+#vscode
+.vscode/
 
 
 #Ipython Notebook
