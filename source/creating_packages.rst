@@ -5,8 +5,9 @@
 Creating Packages
 #################
 
-Feedstocks for Azure Pipelines may be generated based on the following sources
-(listed in the order of preference):
+Feedstocks for `Azure Pipelines
+<https://dev.azure.com/nsls2forge/nsls2forge/_build>`_ may be generated based
+on the following sources (listed in the order of preference):
 
 - `conda-forge feedstocks <https://github.com/conda-forge>`_;
 
@@ -361,6 +362,21 @@ Rerender the feedstock:
 
     $ conda smithy rerender --feedstock_directory ./
 
+.. note::
+
+    From time to time ``conda-smithy`` may inform a user that its version is
+    out-of-date, e.g.:
+
+    .. code-block:: python
+
+        RuntimeError: conda-smithy version in root env (3.4.6) is out-of-date (3.4.7). Exiting.
+
+    Update ``conda-smithy`` to use the latest features:
+
+    .. code-block:: bash
+
+        $ conda install conda-smithy -c conda-forge
+
 Commit the changes (the following command should be copied from the terminal
 output produced by the previous command):
 
@@ -379,7 +395,8 @@ Associate Anaconda token from variable groups with the new pipeline
 ===================================================================
 
 - Log into `dev.azure.com <https://dev.azure.com>`_. 
-- Select the pipeline named ``<package-name>-feedstock``.
+- Go to the `nsls2forge <https://dev.azure.com/nsls2forge/nsls2forge/_build>`_
+  pipelines.  - Select the pipeline named ``<package-name>-feedstock``.
 - Click ``Edit``.
 - Click the button with three vertical dots in the right top corner.
 - Select ``Triggers`` in the drop-down menu.
@@ -410,6 +427,9 @@ Correct issues if necessary.  Each time a change is made to configuration
 files, the feedstock must be rerendered and changes must be committed and
 pushed. Merge the pull request once all issues are fixed and the build statuses
 are :raw-html:`<font color="green">green</font>`.
+
+Once the PR build is finished, the new package or its new version will be
+uploaded to the `Anaconda Cloud <https://anaconda.org>`_.
 
 
 ========================
