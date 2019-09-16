@@ -21,7 +21,7 @@ directory may have arbitrary name and placed in any convenient spot.
 the directory with cloned **event-model-feedstock** repository.
 
 For each package we will create a temporary directory that may be deleted
-after feedstock initialize and the feedstock directory that will contain
+after a feedstock is initialized and the feedstock directory that will contain
 the feedstock repository:
 
 ``~/src/nsls-ii-forge/(package_name)`` -
