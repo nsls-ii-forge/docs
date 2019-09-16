@@ -402,5 +402,5 @@ Tests fail for Linux system due to missing OpenGL
 The solution is to place the file 
 `yum_requirements.txt <https://raw.githubusercontent.com/nsls-ii-forge/collection-feedstock/master/recipe/yum_requirements.txt>`_
 into the recipes directory 
-``~/src/nsls-ii-forge/(package-name)-feedstock/recipes``,
+``~/src/nsls-ii-forge/<package-name>-feedstock/recipes``,
 then rerender, commit and push changes.
