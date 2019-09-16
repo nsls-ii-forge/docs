@@ -3,7 +3,7 @@ Creating Packages
 #################
 
 Feedstocks for Azure pipelines may be generated based on
-existing PyPI or conda-forge packages, or directly from GitHub
+existing PyPI packages or conda-forge feedstocks, or directly from GitHub
 package repositories.
 
 ===================
