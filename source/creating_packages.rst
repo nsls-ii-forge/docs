@@ -25,7 +25,7 @@ after a feedstock is initialized and the feedstock directory that will contain
 the feedstock repository:
 
 ``~/src/nsls-ii-forge/<package_name>`` -
-the temporary directory with package recipe. The directory is
+a temporary directory with the package's recipe. The directory is
 created by **conda skeleton** or manually. The directory name has to
 match the package name, since this is the directory where
 **conda-smithy** will be looking for recipe
