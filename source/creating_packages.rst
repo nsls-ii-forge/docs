@@ -389,7 +389,8 @@ Associate Anaconda Token from Variable Groups With the New Pipeline
 - Open ``Variables`` tab.
 - Select ``Variable groups``.
 - Click the button 'Link variable groups'.
-- Select 'Anaconda token'.
+- Select ``Anaconda token`` and link it to the pipeline.
+- Save changes (do not queue).
 
 ======
 Issues
