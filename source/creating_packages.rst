@@ -396,7 +396,8 @@ Associate Anaconda token from variable groups with the new pipeline
 
 - Log into `dev.azure.com <https://dev.azure.com>`_. 
 - Go to the `nsls2forge <https://dev.azure.com/nsls2forge/nsls2forge/_build>`_
-  pipelines.  - Select the pipeline named ``<package-name>-feedstock``.
+  pipelines.
+- Select the pipeline named ``<package-name>-feedstock``.
 - Click ``Edit``.
 - Click the button with three vertical dots in the right top corner.
 - Select ``Triggers`` in the drop-down menu.
