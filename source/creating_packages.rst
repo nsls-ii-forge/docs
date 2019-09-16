@@ -174,8 +174,7 @@ Edit the ``meta.yaml`` file:
 
 - Additional steps:
 
-  - Add ``LICENSE`` to the ``license_file_name`` field of the ``about:``
-    section.
+  - Add ``LICENSE`` to the ``license_file`` field of the ``about:`` section.
 
   - Update the home URL in ``about:`` section to point to the package's GitHub
     repository or a dedicated web site if it exists.
@@ -261,8 +260,8 @@ Copy the license file from the original package repository into the recipe
 directory.  The license file is typically named ``LICENSE`` (without an
 extension), but in some projects the name may differ (e.g. ``COPYRIGHT``). The
 spelling of the license file name should match the name specified in the
-``license_file_name`` field of the ``about:`` section of the ``meta.yaml`` file
-(see the instructions above). For example, the BSD license used for the Bluesky
+``license_file`` field of the ``about:`` section of the ``meta.yaml`` file (see
+the instructions above). For example, the BSD license used for the Bluesky
 project may be copied to recipes as follows:
 
 .. code-block:: bash
