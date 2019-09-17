@@ -109,7 +109,7 @@ in ``~/src/nsls-ii-forge/event-model-feedstock/recipe/`` directory.  If you
 already have it cloned, pull the latest version of the
 **event-model-feedstock** since the repository may be updated.
 
-.. code-block::
+.. code-block:: bash
 
     $ cd ~/src/nsls-ii-forge
     $ git clone https://github.com/nsls-ii-forge/event-model-feedstock.git
@@ -131,7 +131,7 @@ There are several ways to create the package recipe:
 
 .. note::
 
-    It is important that each of the following command is run from the correct
+    It is important that each of the following commands is run from the correct
     directory. Since it is easy to lose track of directory changes, all the
     paths will be specified relative to the ``$HOME`` directory.
 
@@ -158,7 +158,7 @@ Edit the ``meta.yaml`` file:
 - Add ``requires:`` and ``commands:`` to the ``test:`` section
   (if applicable).
 
-  .. code-block::
+  .. code-block:: yaml
 
     requires:
       - pytest
@@ -167,7 +167,7 @@ Edit the ``meta.yaml`` file:
 
 - Remove the following lines from the ``about:`` section:
 
-  .. code-block::
+  .. code-block:: yaml
 
     doc_url: ""
     dev_url: ""
@@ -197,7 +197,7 @@ available at PyPI. Create a temporary directory:
     $ mkdir <package-name>
     $ cd <package-name>
 
-The recipe may be created based on ``meta.yaml`` file from the respective
+The recipe may be created based on the ``meta.yaml`` file from the respective
 **conda-forge** feedstock (and sometimes from the original package repository).
 If such a file is not available or unusable, find an appropriate sample
 ``meta.yaml`` (from a similar package that was successfully built) and modify
@@ -238,7 +238,7 @@ Open and inspect ``conda_build_config.yaml``:
 
 This is the contents of a typical ``conda_build_config.yaml`` file:
 
-.. code-block::
+.. code-block:: yaml
 
     channel_sources:
     - nsls2forge,defaults
@@ -251,7 +251,7 @@ If you are building a ``noarch`` package, then close the file without change.
 For an architecture-dependent package, a set of Python versions are specified
 in the ``meta.yaml`` file and the following lines should be removed:
 
-.. code-block::
+.. code-block:: yaml
 
     python:
     - '3.6'
@@ -338,7 +338,7 @@ Enable CI on Azure Pipelines
 Verify that CI was enabled on Azure Pipelines. Check for the following line in
 the output:
 
-.. code-block::
+.. code-block:: text
 
     * nsls-ii-forge/<package-name>-feedstock has been enabled on azure pipelines
 
