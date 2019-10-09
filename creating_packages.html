@@ -90,7 +90,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#install-keybase">Install Keybase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#configure-conda-smithy">Configure “conda-smithy”</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#create-a-root-directory-for-packages">Create a root directory for packages</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#clone-the-event-model-feedstock-repository-from-github">Clone the “event-model-feedstock” repository from GitHub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clone-the-event-model-feedstock-repository-from-the-nsls-ii-forge-github-org">Clone the “event-model-feedstock” repository from the nsls-ii-forge GitHub org</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#generate-and-edit-the-meta-yaml-recipe-configuration-file">Generate and edit the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> recipe configuration file</a><ul>
@@ -267,11 +267,13 @@ packages in the directory <code class="docutils literal notranslate"><span class
 </pre></div>
 </div>
 </div>
-<div class="section" id="clone-the-event-model-feedstock-repository-from-github">
-<h3>Clone the “event-model-feedstock” repository from GitHub<a class="headerlink" href="#clone-the-event-model-feedstock-repository-from-github" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="clone-the-event-model-feedstock-repository-from-the-nsls-ii-forge-github-org">
+<h3>Clone the “event-model-feedstock” repository from the nsls-ii-forge GitHub org<a class="headerlink" href="#clone-the-event-model-feedstock-repository-from-the-nsls-ii-forge-github-org" title="Permalink to this headline">¶</a></h3>
 <p>The <strong>event-model-feedstock</strong> needs to be cloned only once. In the process of
-creating packages we will be using the <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code> file located
-in <code class="docutils literal notranslate"><span class="pre">~/src/nsls-ii-forge/event-model-feedstock/recipe/</span></code> directory.  If you
+creating packages we will be using the <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> file located in the
+<code class="docutils literal notranslate"><span class="pre">~/src/nsls-ii-forge/event-model-feedstock/</span></code> directory and the
+<code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code> file located in the
+<code class="docutils literal notranslate"><span class="pre">~/src/nsls-ii-forge/event-model-feedstock/recipe/</span></code> directory.  If you
 already have it cloned, pull the latest version of the
 <strong>event-model-feedstock</strong> since the repository may be updated.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/src/nsls-ii-forge
@@ -423,7 +425,7 @@ $ conda-smithy init &lt;package-name&gt;
 </div>
 <p>A new directory <code class="docutils literal notranslate"><span class="pre">~/src/nsls-ii-forge/&lt;package-name&gt;-feedstock</span></code> is created.</p>
 <p>Replace <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> in the feedstock directory with <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code>
-from the <code class="docutils literal notranslate"><span class="pre">event-model-feedstock</span></code> package:</p>
+from the nsls-ii-forge’s <code class="docutils literal notranslate"><span class="pre">event-model-feedstock</span></code> package you cloned before:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/src/nsls-ii-forge
 $ cp event-model-feedstock/conda-forge.yml &lt;package-name&gt;-feedstock/
 </pre></div>
