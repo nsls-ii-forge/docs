@@ -100,8 +100,8 @@ packages in the directory ``~/src/nsls-ii-forge/``:
 
     $ mkdir -p ~/src/nsls-ii-forge
 
-Clone the "event-model-feedstock" repository from GitHub
-========================================================
+Clone the "event-model-feedstock" repository from the nsls-ii-forge GitHub org
+==============================================================================
 
 The **event-model-feedstock** needs to be cloned only once. In the process of
 creating packages we will be using the ``conda-forge.yml`` file located in the
