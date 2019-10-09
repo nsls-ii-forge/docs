@@ -100,12 +100,14 @@ packages in the directory ``~/src/nsls-ii-forge/``:
 
     $ mkdir -p ~/src/nsls-ii-forge
 
-Clone the "event-model-feedstock" repository from GitHub
-========================================================
+Clone the "event-model-feedstock" repository from the nsls-ii-forge GitHub org
+==============================================================================
 
 The **event-model-feedstock** needs to be cloned only once. In the process of
-creating packages we will be using the ``conda_build_config.yaml`` file located
-in ``~/src/nsls-ii-forge/event-model-feedstock/recipe/`` directory.  If you
+creating packages we will be using the ``conda-forge.yml`` file located in the
+``~/src/nsls-ii-forge/event-model-feedstock/`` directory and the
+``conda_build_config.yaml`` file located in the
+``~/src/nsls-ii-forge/event-model-feedstock/recipe/`` directory.  If you
 already have it cloned, pull the latest version of the
 **event-model-feedstock** since the repository may be updated.
 
@@ -298,7 +300,7 @@ Initialize a feedstock using **conda-smithy**:
 A new directory ``~/src/nsls-ii-forge/<package-name>-feedstock`` is created.
 
 Replace ``conda-forge.yml`` in the feedstock directory with ``conda-forge.yml``
-from the ``event-model-feedstock`` package:
+from the nsls-ii-forge's ``event-model-feedstock`` package you cloned before:
 
 .. code-block:: bash
 
