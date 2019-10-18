@@ -113,7 +113,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#rerender-the-feedstock">Rerender the feedstock</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#associate-anaconda-token-from-variable-groups-with-the-new-pipeline">Associate Anaconda token from variable groups with the new pipeline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#create-a-pull-request-on-github">Create a pull request on GitHub</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#known-or-possible-issues">Known or possible issues</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#tests-fail-for-linux-due-to-a-missing-opengl">Tests fail for Linux due to a missing OpenGL</a></li>
@@ -497,23 +496,6 @@ output produced by the previous command):</p>
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="associate-anaconda-token-from-variable-groups-with-the-new-pipeline">
-<h2>Associate Anaconda token from variable groups with the new pipeline<a class="headerlink" href="#associate-anaconda-token-from-variable-groups-with-the-new-pipeline" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Log into <a class="reference external" href="https://dev.azure.com">dev.azure.com</a>.</p></li>
-<li><p>Go to the <a class="reference external" href="https://dev.azure.com/nsls2forge/nsls2forge/_build">nsls2forge</a>
-pipelines.</p></li>
-<li><p>Select the pipeline named <code class="docutils literal notranslate"><span class="pre">&lt;package-name&gt;-feedstock</span></code>.</p></li>
-<li><p>Click <code class="docutils literal notranslate"><span class="pre">Edit</span></code>.</p></li>
-<li><p>Click the button with three vertical dots in the right top corner.</p></li>
-<li><p>Select <code class="docutils literal notranslate"><span class="pre">Triggers</span></code> in the drop-down menu.</p></li>
-<li><p>Open <code class="docutils literal notranslate"><span class="pre">Variables</span></code> tab.</p></li>
-<li><p>Select <code class="docutils literal notranslate"><span class="pre">Variable</span> <span class="pre">groups</span></code>.</p></li>
-<li><p>Click the <code class="docutils literal notranslate"><span class="pre">Link</span> <span class="pre">variable</span> <span class="pre">group</span></code> button.</p></li>
-<li><p>Select <code class="docutils literal notranslate"><span class="pre">Anaconda</span> <span class="pre">token</span></code> and link it to the pipeline.</p></li>
-<li><p>Save changes (do not queue).</p></li>
-</ul>
 </div>
 <div class="section" id="create-a-pull-request-on-github">
 <h2>Create a pull request on GitHub<a class="headerlink" href="#create-a-pull-request-on-github" title="Permalink to this headline">¶</a></h2>
