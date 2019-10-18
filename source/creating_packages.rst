@@ -395,12 +395,6 @@ Push changes to `upstream`:
 Create a pull request on GitHub
 ===============================
 
-.. note::
-
-    The Anaconda token must be associated with the new Azure Pipeline before a
-    pull request is merged. It is a good practice to associate the token before
-    a pull request is created.
-
 Open the GitHub page
 ``https://github.com/nsls-ii-forge/<package-name>-feedstock`` and create a pull
 request. In the pull request comments include a brief note and **the link to
