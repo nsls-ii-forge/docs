@@ -361,7 +361,7 @@ Rerender the feedstock:
 
 .. code-block:: bash
 
-    $ conda smithy rerender --feedstock_directory ./
+    $ conda smithy rerender --feedstock_directory . -e recipe/conda_build_config.yaml
 
 .. note::
 
