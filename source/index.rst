@@ -10,3 +10,4 @@ NSLS-II-FORGE Documentation
    :maxdepth: 2
 
    creating_packages
+   utils

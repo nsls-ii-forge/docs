@@ -5,7 +5,7 @@
 Utilities
 #########
 
-There are additional utilities for handling feedstocks at `nsls-ii-forge <https://github.com/nsls-ii-forge>`_.
+Utilities for handling feedstocks at `nsls-ii-forge <https://github.com/nsls-ii-forge>`_.
 
 Here is a list of current functioning utilties:
 
@@ -17,62 +17,64 @@ Here is a list of current functioning utilties:
   
   * Clone/List all available feedstock repositories
 
-
-
-
 ============
 Installation
 ============
 
-At the command line::
+At the command line
 
+.. code-block:: bash
     $ pip install nsls2forge-utils
 
-=====
-Usage
-=====
+==============
+Usage Examples
+==============
 
 check-results
 =============
 
-At the command line::
+First set up a conda environment.
 
-	$ check-results [-h] [-t {channels,version}] [-f FORBIDDEN_CHANNEL]
-              		[-c CMD] [-i] [-p PACKAGE] [-e EXPECTED_VERSION]
+.. code-block:: bash
 
-optional arguments:
+	$ conda create -n myenv
+    $ conda activate myenv
 
-	-h, --help
+Install packages from anaconda.
 
-		show this help message and exit
+.. code-block:: bash
 
-	-t {channels, version}, --check-type {channels, version}
+	$ pip install event-model
 
-	    a type of check to perform. One of channels, version
+You can check against a specific version of packages you are interested in with:
 
-	-f FORBIDDEN_CHANNEL, --forbidden-channel FORBIDDEN_CHANNEL
+.. code-block:: bash
 
-	    a channel to warn about if it is found in the package list in a conda environment
+	$ check-results -t version -p event-model -e 1.0
 
-	-c CMD, --cmd CMD
+This will provide output like this:
 
-		a command to check a list of packages in a conda environment
+.. code-block:: bash
 
-	-i, --ignore-exception
+	The found version (1.15.2) of "event_model" is more or equal the expected version (1.0)
 
-	    a flag to print the list of packages from the channels which are forbidden and proceed without exiting if set to True
+You can also check for packages from a specific channel with:
 
-	-p PACKAGE, --package PACKAGE
+.. code-block:: bash
 
-	    a package to check the version for
+	$ check-results -t channels -f conda-forge
 
-	-e EXPECTED_VERSION, --expected-version EXPECTED_VERSION
+This will list all installed packages from the conda-forge channel.
 
-	    minimum expected version of the package
+For more information on possible usage use:
 
+.. code-block:: bash
+
+	$ check-results -h
 
 all-feedstocks
 ==============
+
 
 
 
