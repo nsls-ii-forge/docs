@@ -40,10 +40,10 @@ GitHub Access Token
 
 First, create a `personal access token <https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token>`_ for GitHub.
 
-netrc Setup
+``.netrc`` Setup
 ===========
 
-This may already be setup if you automatically authenticate GitHub using git.
+This may already be setup if you automatically authenticate on GitHub using git.
 
 If not, create a file and open it for editing:
 
@@ -65,7 +65,7 @@ conda-smithy Setup
 ==================
 
 Cloning repositories requires authentication through conda-smithy.
-To install conda-smithy run:
+To install conda-smithy, run:
 
 .. code-block:: bash
 
@@ -91,7 +91,7 @@ Usage Examples
 check-results
 =============
 
-First set up a conda environment.
+First, set up a conda environment.
 
 .. code-block:: bash
 
@@ -156,13 +156,13 @@ You can write these names to a file with the :bash:`-w` or :bash:`--write` flag.
     You can manually specify the username and personal access token for listing all feedstocks
     with :bash:`--username` and :bash:`--token` instead of :bash:`~/.netrc`.
 
-To clone all feedstocks belonging to a GitHub organization use:
+To clone all feedstocks belonging to a GitHub organization, use:
 
 .. code-block:: bash
 
     $ all-feedstocks -o nsls-ii-forge clone
 
-This will clone all feedstocks to :bash:`/feedstocks` in your current working directory.
+This will clone all feedstocks to the :bash:`feedstocks/` directory in your current working directory.
 
 For more information on possible usage:
 
