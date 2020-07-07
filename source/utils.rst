@@ -41,7 +41,7 @@ GitHub Access Token
 First, create a `personal access token <https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token>`_ for GitHub.
 
 ``.netrc`` Setup
-===========
+================
 
 This may already be setup if you automatically authenticate on GitHub using git.
 
@@ -61,6 +61,13 @@ Place the following in that file with your GitHub username and access token.
 
 To save the file and quit hit ESC, type :bash:`wq` and hit ENTER.
 
+To make this file owner-readable only, use:
+
+.. code-block:: bash
+
+    $ chmod 600 ~/.netrc
+
+
 conda-smithy Setup
 ==================
 
@@ -78,6 +85,12 @@ Now place the token in the correct file:
     $ vi ~/.conda-smithy/github.token
 
 To save the file and quit hit ESC, type :bash:`wq` and hit ENTER.
+
+To make this file owner-readable only, use:
+
+.. code-block:: bash
+
+    $ chmod -Rv go-rwx ~/.conda-smithy
 
 .. note::
 
