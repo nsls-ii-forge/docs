@@ -164,6 +164,9 @@ This will output a sorted list of repo names ending with :bash:`-feedstock`.
 
 You can write these names to a file with the :bash:`-w` or :bash:`--write` flag.
 
+You can include all archived feedstocks with the :bash:`-a` or :bash:`--archived` flag.
+The default behavior is to ignore archived feedstocks.
+
 .. note::
 
     You can manually specify the username and personal access token for listing all feedstocks
