@@ -27,6 +27,17 @@ Here is a list of current functioning utilties:
 
   * Extract and operate on information from meta.yaml feedstock files
 
+* graph-utils
+
+  * Create a dependency graph of feedstock packages or query information from an existing one
+
+.. note::
+
+    A dependency graph is a directed acyclic graph that contains a node for each software package.
+    The parents of a node (higher up in the graph) are packages that the node's package requires
+    to build, host, or run. See example usage below.
+
+
 ============
 Installation
 ============
@@ -298,3 +309,77 @@ For more information on possible usage:
 .. code-block:: bash
 
     $ meta-utils -h
+
+graph-utils
+===========
+
+To create/update a dependency graph with new package feedstocks, use:
+
+.. code-block:: bash
+
+    graph-utils make -o nsls-ii-forge
+
+This will store the result in a JSON file :bash:`graph.json`.
+
+To load the graph in your python script, use:
+
+.. code-block:: python
+
+    import json
+    import networkx as nx
+    j = json.load('graph.json')
+    graph = nx.node_link_graph(j)
+
+To query information from the graph, use:
+
+.. code-block:: bash
+
+    $ graph-utils info -p event-model -q depends_on
+    The following packages require event-model to be installed:
+    analysis
+    bluesky
+    bluesky-darkframes
+    databroker
+    databroker-pack
+    shed
+    suitcase-csv
+    suitcase-json-metadata
+    suitcase-jsonl
+    suitcase-mongo
+    suitcase-msgpack
+    suitcase-specfile
+    suitcase-tiff
+    xicam
+    xicam.xpcs
+    Total: 15
+    $ graph-utils info -p event-model -q depends_of
+    event-model requires the following packages to be installed:
+    jsonschema
+    numpy
+    pip
+    pytest
+    python
+    Total: 5
+
+:bash:`depends_on` and :bash:`depends_of` are currently the only two types of queries.
+
+To update nodes in the graph with new versions from their sources, use:
+
+.. code-block:: bash
+
+    $ graph-utils update
+
+This will pull new version numbers from various sources (PyPI, Github, etc.) and update each node with
+a tag "new_version".
+
+In the near future, there will be a bot that will handle packages with "new_version" greater than "version"
+and submit pull requests automatically to update the appropriate feedstock repostiories.
+
+For more information on possible usage:
+
+.. code-block:: bash
+
+    $ graph-utils -h
+    $ graph-utils make -h
+    $ graph-utils info -h
+    $ graph-utils update -h
