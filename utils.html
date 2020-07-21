@@ -178,7 +178,7 @@
 </li>
 <li><p>all-feedstocks</p>
 <ul>
-<li><p>Clone/List all available feedstock repositories</p></li>
+<li><p>Clone/List all available feedstock repositories and get info from them</p></li>
 </ul>
 </li>
 </ul>
@@ -296,10 +296,15 @@ with <code class="code bash docutils literal notranslate"><span class="pre">--us
 </pre></div>
 </div>
 <p>This will clone all feedstocks to the <code class="code bash docutils literal notranslate"><span class="pre">feedstocks/</span></code> directory in your current working directory.</p>
+<p>To get information about Git and version information from currently cloned feedstock repos, use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ all-feedstocks info
+</pre></div>
+</div>
 <p>For more information on possible usage:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ all-feedstocks -h
 $ all-feedstocks list -h
 $ all-feedstocks clone -h
+$ all-feedstocks info -h
 </pre></div>
 </div>
 </div>

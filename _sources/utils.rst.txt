@@ -17,7 +17,7 @@ Here is a list of current functioning utilties:
 
 * all-feedstocks
   
-  * Clone/List all available feedstock repositories
+  * Clone/List all available feedstock repositories and get info from them
 
 ============
 Installation
@@ -180,6 +180,13 @@ To clone all feedstocks belonging to a GitHub organization, use:
 
 This will clone all feedstocks to the :bash:`feedstocks/` directory in your current working directory.
 
+To get information about Git and version information from currently cloned feedstock repos, use:
+
+.. code-block:: bash
+
+    $ all-feedstocks info
+
+
 For more information on possible usage:
 
 .. code-block:: bash
@@ -187,3 +194,4 @@ For more information on possible usage:
     $ all-feedstocks -h
     $ all-feedstocks list -h
     $ all-feedstocks clone -h
+    $ all-feedstocks info -h
