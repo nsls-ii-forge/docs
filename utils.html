@@ -97,6 +97,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#check-results">check-results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#all-feedstocks">all-feedstocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dashboard">dashboard</a></li>
 </ul>
 </li>
 </ul>
@@ -179,6 +180,11 @@
 <li><p>all-feedstocks</p>
 <ul>
 <li><p>Clone/List all available feedstock repositories and get info from them</p></li>
+</ul>
+</li>
+<li><p>dashboard</p>
+<ul>
+<li><p>Create a dashboard of package feedstocks for nsls-ii-forge</p></li>
 </ul>
 </li>
 </ul>
@@ -305,6 +311,30 @@ with <code class="code bash docutils literal notranslate"><span class="pre">--us
 $ all-feedstocks list -h
 $ all-feedstocks clone -h
 $ all-feedstocks info -h
+</pre></div>
+</div>
+</div>
+<div class="section" id="dashboard">
+<h3>dashboard<a class="headerlink" href="#dashboard" title="Permalink to this headline">¶</a></h3>
+<p>To create a dashboard of package feedstocks for nsls-ii-forge, use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ dashboard
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This uses <code class="code bash docutils literal notranslate"><span class="pre">~/.netrc</span></code> for GitHub authentication.</p>
+</div>
+<p>You can optionally provide a list of feedstock package names from a
+text file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ dashboard -n names.txt
+</pre></div>
+</div>
+<p>You can also specify the output file name (default is README.md):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ dashboard -w output.md
+</pre></div>
+</div>
+<p>For more information on possible usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ dashbord -h
 </pre></div>
 </div>
 </div>

@@ -19,6 +19,10 @@ Here is a list of current functioning utilties:
   
   * Clone/List all available feedstock repositories and get info from them
 
+* dashboard
+
+  * Create a dashboard of package feedstocks for nsls-ii-forge
+
 ============
 Installation
 ============
@@ -195,3 +199,35 @@ For more information on possible usage:
     $ all-feedstocks list -h
     $ all-feedstocks clone -h
     $ all-feedstocks info -h
+
+dashboard
+=========
+
+To create a dashboard of package feedstocks for nsls-ii-forge, use:
+
+.. code-block:: bash
+
+    $ dashboard
+
+.. note::
+
+    This uses :bash:`~/.netrc` for GitHub authentication.
+
+You can optionally provide a list of feedstock package names from a
+text file:
+
+.. code-block:: bash
+
+    $ dashboard -n names.txt
+
+You can also specify the output file name (default is README.md):
+
+.. code-block:: bash
+
+    $ dashboard -w output.md
+
+For more information on possible usage:
+
+.. code-block:: bash
+
+    $ dashbord -h
