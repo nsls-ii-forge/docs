@@ -92,12 +92,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#github-access-token">GitHub Access Token</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#netrc-setup"><code class="docutils literal notranslate"><span class="pre">.netrc</span></code> Setup</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conda-smithy-setup">conda-smithy Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conda-forge-tick-setup">conda-forge-tick Setup</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#check-results">check-results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#all-feedstocks">all-feedstocks</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dashboard">dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#meta-utils">meta-utils</a></li>
 </ul>
 </li>
 </ul>
@@ -187,6 +189,11 @@
 <li><p>Create a dashboard of package feedstocks for nsls-ii-forge</p></li>
 </ul>
 </li>
+<li><p>meta-utils</p>
+<ul>
+<li><p>Extract and operate on information from meta.yaml feedstock files</p></li>
+</ul>
+</li>
 </ul>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
@@ -241,6 +248,22 @@ To install conda-smithy, run:</p>
 <p class="admonition-title">Note</p>
 <p>Authentication using <code class="code bash docutils literal notranslate"><span class="pre">~/.conda-smithy/github.token</span></code> is only required
 when cloning feedstock repositories.</p>
+</div>
+</div>
+<div class="section" id="conda-forge-tick-setup">
+<h3>conda-forge-tick Setup<a class="headerlink" href="#conda-forge-tick-setup" title="Permalink to this headline">¶</a></h3>
+<p>Some utilities require functionality from the <cite>conda-forge-tick</cite> package.</p>
+<p>The repository can be found <a class="reference external" href="https://github.com/regro/cf-scripts">here</a>.</p>
+<p>To install this package, use the following commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone --depth <span class="m">1</span> https://github.com/regro/cf-scripts.git
+$ <span class="nb">cd</span> ./cf-scripts
+$ python setup.py install
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Cloning this repository is the only method of installing it since
+there is no tagged version available at the moment.</p>
 </div>
 </div>
 </div>
@@ -335,6 +358,36 @@ text file:</p>
 </div>
 <p>For more information on possible usage:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ dashbord -h
+</pre></div>
+</div>
+</div>
+<div class="section" id="meta-utils">
+<h3>meta-utils<a class="headerlink" href="#meta-utils" title="Permalink to this headline">¶</a></h3>
+<p>To get any attribute of a feedstock packages <code class="code bash docutils literal notranslate"><span class="pre">meta.yaml</span></code> file, use <code class="code bash docutils literal notranslate"><span class="pre">-g</span></code> or <code class="code bash docutils literal notranslate"><span class="pre">--get</span></code>:</p>
+<p>Examples:</p>
+<p>Getting the source url for event-model</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ meta-utils -o nsls-ii-forge -p event-model -g <span class="nb">source</span> url
+<span class="nb">source</span> url: https://pypi.io/packages/source/e/event-model/event-model-1.15.2.tar.gz
+</pre></div>
+</div>
+<p>Getting the package info for event-model</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ meta-utils -o nsls-ii-forge -p event-model -g package
+package: <span class="o">{</span><span class="s1">&#39;name&#39;</span>: <span class="s1">&#39;event-model&#39;</span>, <span class="s1">&#39;version&#39;</span>: <span class="s1">&#39;1.15.2&#39;</span><span class="o">}</span>
+</pre></div>
+</div>
+<p>Getting the requirements to run event-model:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ meta-utils -o nsls-ii-forge -p event-model -g requirements run
+requirements run: <span class="o">[</span><span class="s1">&#39;python &gt;=3.6&#39;</span>, <span class="s1">&#39;jsonschema&#39;</span>, <span class="s1">&#39;numpy&#39;</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>To download a package from its source url, use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ meta-utils -o nsls-ii-forge -p event-model -d
+Successfully downloaded https://pypi.io/packages/source/e/event-model/event-model-1.15.2.tar.gz
+sha256: 31b6103801abcc3ebe099757bca7c9da9b4d535330acf0ba10d81c0753eb0e51
+</pre></div>
+</div>
+<p>For more information on possible usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ meta-utils -h
 </pre></div>
 </div>
 </div>
