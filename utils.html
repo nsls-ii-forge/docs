@@ -100,6 +100,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#all-feedstocks">all-feedstocks</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dashboard">dashboard</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#meta-utils">meta-utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#graph-utils">graph-utils</a></li>
 </ul>
 </li>
 </ul>
@@ -194,7 +195,18 @@
 <li><p>Extract and operate on information from meta.yaml feedstock files</p></li>
 </ul>
 </li>
+<li><p>graph-utils</p>
+<ul>
+<li><p>Create a dependency graph of feedstock packages or query information from an existing one</p></li>
 </ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A dependency graph is a directed acyclic graph that contains a node for each software package.
+The parents of a node (higher up in the graph) are packages that the node’s package requires
+to build, host, or run. See example usage below.</p>
+</div>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>At the command line</p>
@@ -388,6 +400,66 @@ sha256: 31b6103801abcc3ebe099757bca7c9da9b4d535330acf0ba10d81c0753eb0e51
 </div>
 <p>For more information on possible usage:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ meta-utils -h
+</pre></div>
+</div>
+</div>
+<div class="section" id="graph-utils">
+<h3>graph-utils<a class="headerlink" href="#graph-utils" title="Permalink to this headline">¶</a></h3>
+<p>To create/update a dependency graph with new package feedstocks, use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>graph-utils make -o nsls-ii-forge
+</pre></div>
+</div>
+<p>This will store the result in a JSON file <code class="code bash docutils literal notranslate"><span class="pre">graph.json</span></code>.</p>
+<p>To load the graph in your python script, use:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="n">j</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;graph.json&#39;</span><span class="p">)</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">node_link_graph</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To query information from the graph, use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ graph-utils info -p event-model -q depends_on
+The following packages require event-model to be installed:
+analysis
+bluesky
+bluesky-darkframes
+databroker
+databroker-pack
+shed
+suitcase-csv
+suitcase-json-metadata
+suitcase-jsonl
+suitcase-mongo
+suitcase-msgpack
+suitcase-specfile
+suitcase-tiff
+xicam
+xicam.xpcs
+Total: <span class="m">15</span>
+$ graph-utils info -p event-model -q depends_of
+event-model requires the following packages to be installed:
+jsonschema
+numpy
+pip
+pytest
+python
+Total: <span class="m">5</span>
+</pre></div>
+</div>
+<p><code class="code bash docutils literal notranslate"><span class="pre">depends_on</span></code> and <code class="code bash docutils literal notranslate"><span class="pre">depends_of</span></code> are currently the only two types of queries.</p>
+<p>To update nodes in the graph with new versions from their sources, use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ graph-utils update
+</pre></div>
+</div>
+<p>This will pull new version numbers from various sources (PyPI, Github, etc.) and update each node with
+a tag “new_version”.</p>
+<p>In the near future, there will be a bot that will handle packages with “new_version” greater than “version”
+and submit pull requests automatically to update the appropriate feedstock repostiories.</p>
+<p>For more information on possible usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ graph-utils -h
+$ graph-utils make -h
+$ graph-utils info -h
+$ graph-utils update -h
 </pre></div>
 </div>
 </div>
