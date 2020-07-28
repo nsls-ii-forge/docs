@@ -23,6 +23,10 @@ Here is a list of current functioning utilties:
 
   * Create a dashboard of package feedstocks for nsls-ii-forge
 
+* meta-utils
+
+  * Extract and operate on information from meta.yaml feedstock files
+
 ============
 Installation
 ============
@@ -100,6 +104,27 @@ To make this file owner-readable only, use:
 
     Authentication using :bash:`~/.conda-smithy/github.token` is only required
     when cloning feedstock repositories.
+
+conda-forge-tick Setup
+======================
+
+Some utilities require functionality from the `conda-forge-tick` package.
+
+The repository can be found `here <https://github.com/regro/cf-scripts>`_.
+
+To install this package, use the following commands:
+
+.. code-block:: bash
+
+    $ git clone --depth 1 https://github.com/regro/cf-scripts.git
+    $ cd ./cf-scripts
+    $ python setup.py install
+
+.. note::
+
+    Cloning this repository is the only method of installing it since
+    there is no tagged version available at the moment.
+
 
 ==============
 Usage Examples
@@ -231,3 +256,45 @@ For more information on possible usage:
 .. code-block:: bash
 
     $ dashbord -h
+
+meta-utils
+==========
+
+To get any attribute of a feedstock packages :bash:`meta.yaml` file, use :bash:`-g` or :bash:`--get`:
+
+Examples:
+
+Getting the source url for event-model
+
+.. code-block:: bash
+
+    $ meta-utils -o nsls-ii-forge -p event-model -g source url
+    source url: https://pypi.io/packages/source/e/event-model/event-model-1.15.2.tar.gz
+
+Getting the package info for event-model
+
+.. code-block:: bash
+
+    $ meta-utils -o nsls-ii-forge -p event-model -g package
+    package: {'name': 'event-model', 'version': '1.15.2'}
+
+Getting the requirements to run event-model:
+
+.. code-block:: bash
+
+    $ meta-utils -o nsls-ii-forge -p event-model -g requirements run
+    requirements run: ['python >=3.6', 'jsonschema', 'numpy']
+
+To download a package from its source url, use:
+
+.. code-block:: bash
+
+    $ meta-utils -o nsls-ii-forge -p event-model -d
+    Successfully downloaded https://pypi.io/packages/source/e/event-model/event-model-1.15.2.tar.gz
+    sha256: 31b6103801abcc3ebe099757bca7c9da9b4d535330acf0ba10d81c0753eb0e51
+
+For more information on possible usage:
+
+.. code-block:: bash
+
+    $ meta-utils -h
