@@ -31,6 +31,10 @@ Here is a list of current functioning utilties:
 
   * Create a dependency graph of feedstock packages or query information from an existing one
 
+* auto-tick
+
+  * Automatically update versions of packages by submitting pull requests for feedstock repositories
+
 .. note::
 
     A dependency graph is a directed acyclic graph that contains a node for each software package.
@@ -135,6 +139,28 @@ To install this package, use the following commands:
 
     Cloning this repository is the only method of installing it since
     there is no tagged version available at the moment.
+
+auto-tick Setup
+===============
+
+For the auto-tick bot to submit pull requests on GitHub, it requires both
+a username and a token.
+
+To do this, you need to set certain environment variables.
+
+To use the nsls2forge GitHub account, export the following environment variables:
+
+.. code-block:: bash
+
+    $ export GITHUB_USERNAME=nsls2forge
+    $ export GITHUB_TOKEN=[TOKEN]
+
+.. note::
+
+    The token will not be publicly available, you can instead use your own
+    token and username and specify :bash:`auto-tick run --fork`. This will
+    fork the feedstock repository to the specified user and submit the
+    pull request from there.
 
 
 ==============
@@ -383,3 +409,54 @@ For more information on possible usage:
     $ graph-utils make -h
     $ graph-utils info -h
     $ graph-utils update -h
+
+auto-tick
+=========
+
+To submit pull requests for feedstock repository version updates automatically,
+you will first have had to run at the very least:
+
+.. code-block:: bash
+
+    $ graph-utils make
+    $ graph-utils update
+
+This will provide the dependency graph with updated version numbers that the bot will use to decide
+the correct ordering for updating packages. Please read the :bash:`graph-utils` section above
+for more information on usage.
+
+The bot can be run with:
+
+.. code-block:: bash
+
+    $ auto-tick run --dry-run
+    $ auto-tick run
+
+.. note::
+
+    You should always perform a dry run of the bot before running in full. This will display
+    which package versions will be updated prior to making the change and submitting pull requests.
+    If any errors occur during either the dry or full run, see the next section on cleaning.
+
+To clean the current directory of all files related to the bot's operation, use:
+
+.. code-block:: bash
+
+    $ auto-tick clean
+
+You will have to restart the process for making and updating the graph.
+
+To output the status of all active migrations/pull requests, use:
+
+.. code-block:: bash
+
+    $ auto-tick status
+
+For more information on possible usage:
+
+.. code-block:: bash
+
+    $ auto-tick -h
+    $ auto-tick run -h
+    $ auto-tick clean -h
+    $ auto-tick status -h
