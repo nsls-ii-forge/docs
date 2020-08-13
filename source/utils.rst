@@ -148,7 +148,7 @@ a username and a token.
 
 To do this, you need to set certain environment variables.
 
-To use the nsls2forge GitHub account, use:
+To use the nsls2forge GitHub account, export the following environment variables:
 
 .. code-block:: bash
 
