@@ -41,6 +41,20 @@ Here is a list of current functioning utilties:
     The parents of a node (higher up in the graph) are packages that the node's package requires
     to build, host, or run. See example usage below.
 
+==============
+Paper & Poster
+==============
+
+This project was supported as part of the Science Undergraduate Laboratory Internships (SULI) program
+at Brookhaven National Laboratory.
+
+Below are links to the paper and poster outlining this project:
+
+
+:download:`Paper <../project/Paper.pdf>`
+
+:download:`Poster <../project/Poster.pdf>`
+
 
 ============
 Installation
