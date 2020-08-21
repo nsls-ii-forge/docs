@@ -8,7 +8,7 @@ Auto-tick-bot
 #############
 
 This bot uses nsls2forge-utils to update versions of packages
-automatically at the nsls-ii-forge GitHub organization.
+automatically at the `nsls-ii-forge <https://github.com/nsls-ii-forge>`_ GitHub organization.
 
 
 It currently runs on `Azure Pipelines <https://dev.azure.com/nsls2forge/nsls2forge/_build?definitionId=236>`_ on a daily schedule.
@@ -21,7 +21,7 @@ repository on GitHub.
 The Process
 ===========
 
-The auto-tick-bot peforms a couple of different steps.
+The auto-tick-bot performs a couple of different steps.
 
 1. Retrieve the cached version of the dependency graph from `auto-tick-graph <https://github.com/nsls-ii-forge/auto-tick-graph>`_
 
