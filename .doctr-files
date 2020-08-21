@@ -1,5 +1,6 @@
 ./_downloads/425c1f1fa6939ed435944e98d4d8d5ac/Poster.pdf
 ./_downloads/4913aff466d90fbb9cc0abf2dd237c6b/Paper.pdf
+./_sources/auto_tick.rst.txt
 ./_sources/creating_packages.rst.txt
 ./_sources/index.rst.txt
 ./_sources/utils.rst.txt
@@ -91,6 +92,7 @@
 ./_static/searchtools.js
 ./_static/underscore-1.3.1.js
 ./_static/underscore.js
+./auto_tick.html
 ./creating_packages.html
 ./genindex.html
 ./index.html

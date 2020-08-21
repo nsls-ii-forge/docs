@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>NSLS-II-FORGE Documentation &mdash; docs  documentation</title>
+  <title>Auto-tick-bot &mdash; docs  documentation</title>
   
 
   
@@ -39,7 +39,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Creating Packages" href="creating_packages.html" /> 
+    <link rel="prev" title="Utilities" href="utils.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -53,7 +53,7 @@
           
 
           
-            <a href="#" class="icon icon-home" alt="Documentation Home"> docs
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> docs
           
 
           
@@ -84,10 +84,13 @@
               
             
             
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="creating_packages.html">Creating Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utilities</a></li>
-<li class="toctree-l1"><a class="reference internal" href="auto_tick.html">Auto-tick-bot</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Auto-tick-bot</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-process">The Process</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -103,7 +106,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">docs</a>
+          <a href="index.html">docs</a>
         
       </nav>
 
@@ -132,15 +135,15 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>NSLS-II-FORGE Documentation</li>
+      <li>Auto-tick-bot</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/auto_tick.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -153,33 +156,37 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="nsls-ii-forge-documentation">
-<h1>NSLS-II-FORGE Documentation<a class="headerlink" href="#nsls-ii-forge-documentation" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="creating_packages.html">Creating Packages</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages.html#directory-structure">Directory structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages.html#set-up-the-development-environment">Set up the development environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages.html#generate-and-edit-the-meta-yaml-recipe-configuration-file">Generate and edit the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> recipe configuration file</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages.html#prepare-recipe-files">Prepare recipe files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages.html#generate-an-empty-feedstock-repository">Generate an empty feedstock repository</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages.html#rerender-and-push-the-feedstock-repository">Rerender and push the feedstock repository</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages.html#create-a-pull-request-on-github">Create a pull request on GitHub</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages.html#known-or-possible-issues">Known or possible issues</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="utils.html">Utilities</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#paper-poster">Paper &amp; Poster</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#github-authentication">GitHub Authentication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#usage-examples">Usage Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="auto_tick.html">Auto-tick-bot</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="auto_tick.html#the-process">The Process</a></li>
-</ul>
-</li>
-</ul>
+  <div class="section" id="auto-tick-bot">
+<h1>Auto-tick-bot<a class="headerlink" href="#auto-tick-bot" title="Permalink to this headline">¶</a></h1>
+<p>This bot uses nsls2forge-utils to update versions of packages
+automatically at the <a class="reference external" href="https://github.com/nsls-ii-forge">nsls-ii-forge</a> GitHub organization.</p>
+<p>It currently runs on <a class="reference external" href="https://dev.azure.com/nsls2forge/nsls2forge/_build?definitionId=236">Azure Pipelines</a> on a daily schedule.</p>
+<p>The setup and execution scripts can be found at the <a class="reference external" href="https://github.com/nsls-ii-forge/auto-tick-bot">auto-tick-bot</a>
+repository on GitHub.</p>
+<div class="section" id="the-process">
+<h2>The Process<a class="headerlink" href="#the-process" title="Permalink to this headline">¶</a></h2>
+<p>The auto-tick-bot performs a couple of different steps.</p>
+<ol class="arabic simple">
+<li><p>Retrieve the cached version of the dependency graph from <a class="reference external" href="https://github.com/nsls-ii-forge/auto-tick-graph">auto-tick-graph</a></p></li>
+<li><p>Update the graph with any new or updated feedstocks</p></li>
+<li><p>Get new versions of packages from their sources (PyPI, GitHub, etc.) and update in graph</p></li>
+<li><p>Perform a dry-run of the version migration and queue packages to be migrated</p></li>
+<li><p>Perform a full run of the version migration and submit PRs for up to 10 packages per run</p></li>
+<li><p>Output status of PRs and migrations</p></li>
+<li><p>Push the changes to the graph back to <a class="reference external" href="https://github.com/nsls-ii-forge/auto-tick-graph">auto-tick-graph</a></p></li>
+<li><p>Clean the current directory</p></li>
+</ol>
+<p>If the bot fails during a run on Azure Pipelines, please remove the current schedule or disable the pipeline until the issue is fixed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If this process fails at step 5 or 6, there may be multiple pull requests submitted for a single
+version update for a feedstock. This is because the <code class="code bash docutils literal notranslate"><span class="pre">pr_json</span></code> object that is created and assigned to the
+package does not get pushed to the cached <a class="reference external" href="https://github.com/nsls-ii-forge/auto-tick-graph">auto-tick-graph</a>.
+Closing or Merging these PRs before the bot runs again is recommended.</p>
+</div>
+<p>Some packages may run into other types of errors. These will be displayed in the log on Azure Pipelines as well as in
+the <a class="reference external" href="https://github.com/nsls-ii-forge/auto-tick-graph/blob/master/status/version_status.json">version status JSON file</a>.</p>
+<p>Do not remove files manually from <a class="reference external" href="https://github.com/nsls-ii-forge/auto-tick-graph">auto-tick-graph</a> unless you know what you are doing.</p>
 </div>
 </div>
 
@@ -191,8 +198,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="creating_packages.html" class="btn btn-neutral float-right" title="Creating Packages" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
+        <a href="utils.html" class="btn btn-neutral float-left" title="Utilities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
