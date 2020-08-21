@@ -11,3 +11,4 @@ NSLS-II-FORGE Documentation
 
    creating_packages
    utils
+   auto_tick
