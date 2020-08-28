@@ -217,6 +217,15 @@ or download ``meta.yaml`` from a known URL:
 
 Open and edit the ``meta.yaml`` file.
 
+Generate SHA256 digest
+----------------------
+When manually creating a recipe it will be necessary to calculate the SHA256
+digest of the tar.gz. The recommended method is to use ``openssl``. For example:
+
+.. code-block:: bash
+
+    openssl sha256 bluesky-1.6.6.tar.gz
+
 ====================
 Prepare recipe files
 ====================
