@@ -217,6 +217,33 @@ or download ``meta.yaml`` from a known URL:
 
 Open and edit the ``meta.yaml`` file.
 
+SHA256 digest
+-------------
+When manually creating a recipe it will be necessary to find or calculate the
+SHA256 digest of the ``<package>.tar.gz`` file. If the package has been released on
+PyPI then the SHA256 digest of the associated ``<package>.tar.gz`` file can be found
+directly on PyPI without the need to calculate it. Set ``source: url:`` in ``meta.yml``
+to the PyPI download link.
+
+If the package has not been released on PyPI a ``<package>.tar.gz`` file may be
+available from GitHub or a similar online source code repository. In this case
+download the ``<package>.tar.gz`` file and calculate its SHA256 digest. The
+recommended method is to use ``openssl``.
+For example,
+
+.. code-block:: bash
+
+    wget https://github.com/bluesky/bluesky/archive/v1.6.6.tar.gz
+
+    openssl sha256 v1.6.6.tar.gz
+
+Use the download link from the source code repository for ``source: url:`` in ``meta.yml``.
+
+.. note::
+
+    The ``<package>.tar.gz`` file on PyPI will not have the same SHA256 digest as the
+    ``<package>.tar.gz`` file downloaded from a source code repository such as GitHub.
+
 ====================
 Prepare recipe files
 ====================
