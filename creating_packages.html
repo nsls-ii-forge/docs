@@ -98,7 +98,10 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#generate-and-edit-the-meta-yaml-recipe-configuration-file">Generate and edit the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> recipe configuration file</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#generate-a-recipe-from-a-pypi-package">Generate a recipe from a PyPI package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#manually-create-a-recipe-or-use-the-existing-recipe">Manually create a recipe or use the existing recipe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manually-create-a-recipe-or-use-the-existing-recipe">Manually create a recipe or use the existing recipe</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sha256-digest">SHA256 digest</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#prepare-recipe-files">Prepare recipe files</a><ul>
@@ -365,6 +368,30 @@ it.  Copy <code class="docutils literal notranslate"><span class="pre">meta.yaml
 </pre></div>
 </div>
 <p>Open and edit the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file.</p>
+<div class="section" id="sha256-digest">
+<h4>SHA256 digest<a class="headerlink" href="#sha256-digest" title="Permalink to this headline">¶</a></h4>
+<p>When manually creating a recipe it will be necessary to find or calculate the
+SHA256 digest of the <code class="docutils literal notranslate"><span class="pre">&lt;package&gt;.tar.gz</span></code> file. If the package has been released on
+PyPI then the SHA256 digest of the associated <code class="docutils literal notranslate"><span class="pre">&lt;package&gt;.tar.gz</span></code> file can be found
+directly on PyPI without the need to calculate it. Set <code class="docutils literal notranslate"><span class="pre">source:</span> <span class="pre">url:</span></code> in <code class="docutils literal notranslate"><span class="pre">meta.yml</span></code>
+to the PyPI download link.</p>
+<p>If the package has not been released on PyPI a <code class="docutils literal notranslate"><span class="pre">&lt;package&gt;.tar.gz</span></code> file may be
+available from GitHub or a similar online source code repository. In this case
+download the <code class="docutils literal notranslate"><span class="pre">&lt;package&gt;.tar.gz</span></code> file and calculate its SHA256 digest. The
+recommended method is to use <code class="docutils literal notranslate"><span class="pre">openssl</span></code>.
+For example,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget https://github.com/bluesky/bluesky/archive/v1.6.6.tar.gz
+
+openssl sha256 v1.6.6.tar.gz
+</pre></div>
+</div>
+<p>Use the download link from the source code repository for <code class="docutils literal notranslate"><span class="pre">source:</span> <span class="pre">url:</span></code> in <code class="docutils literal notranslate"><span class="pre">meta.yml</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;package&gt;.tar.gz</span></code> file on PyPI will not have the same SHA256 digest as the
+<code class="docutils literal notranslate"><span class="pre">&lt;package&gt;.tar.gz</span></code> file downloaded from a source code repository such as GitHub.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="prepare-recipe-files">
